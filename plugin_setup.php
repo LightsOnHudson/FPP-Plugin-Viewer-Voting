@@ -30,7 +30,7 @@ $logFile = $settings['logDirectory']."/".$pluginName.".log";
 $DEBUG = ReadSettingFromFile("DEBUG",$pluginName);
 logEntry("Reading setting from file debug: ".$DEBUG);
 
-$DEBUG = false;
+//$DEBUG = false;
 
 $sequenceExtension = ".fseq";
 
