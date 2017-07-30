@@ -27,7 +27,7 @@ $logFile = $settings['logDirectory']."/".$pluginName.".log";
 $sequenceExtension = ".fseq";
 
 logEntry("plugin update file: ".$pluginUpdateFile);
-
+logEntry("donate file: ".$dontateFile);
 //logEntry("open log file: ".$logFile);
 
 
