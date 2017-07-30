@@ -10,3 +10,6 @@ $DONATE_ADDRESS = "brbshaver@gmail.com";
 <input type="hidden" name="amount" value="<?php echo $DONATE_AMOUNT;?>">
 <input type="image" src="http://www.paypal.com/en_US/i/btn/x-click-butcc-donate.gif" border="0" name="submit" alt="Make payments with PayPal - it's fast, free and secure!">
 </form>
+
+<?
+?>
