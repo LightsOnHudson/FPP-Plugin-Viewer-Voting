@@ -27,8 +27,10 @@ $gitURL = "https://github.com/LightsOnHudson/FPP-Plugin-Viewer-Voting.git";
 //$DEBUG=true;
 $logFile = $settings['logDirectory']."/".$pluginName.".log";
 
+$DEBUG = ReadSettingFromFile("DEBUG",$pluginName);
+logEntry("Reading setting from file debug: ".$DEBUG);
 
-$DEBUG = true;
+$DEBUG = false;
 
 $sequenceExtension = ".fseq";
 
