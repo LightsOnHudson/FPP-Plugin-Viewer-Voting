@@ -134,20 +134,19 @@ echo "</tr> \n";
 
 echo "<tr> \n";
 echo "<td> \n";
-PrintFalconSystemsSelect();
+
 echo $IP_ADDRESS;
 echo "</td> \n";
 
 echo "<td> \n";
-echo tryGetHost($IP_ADDRESS);
+
 echo "</td> \n";
 
 echo "<td> \n";
-echo getFalconObjectValue($IP_ADDRESS, "fldUptime", "td");
+
 echo "</td> \n";
 
-$temp_processor = getFalconObjectValue($IP_ADDRESS, "fldChipTemp", "td");
-$farenheight_temp_processor = celciusToFarenheight($temp_processor);
+
 echo "<td> \n";
 echo $temp_processor;
 echo "(C) \n";
@@ -156,7 +155,7 @@ echo $farenheight_temp_processor;
 echo "(F) \n";
 echo "</td> \n";
 echo "<td> \n";
-echo getFalconObjectValue($IP_ADDRESS, "lblUniverseCount", "label");
+
 echo "</td> \n";
 echo "</tr> \n";
 
