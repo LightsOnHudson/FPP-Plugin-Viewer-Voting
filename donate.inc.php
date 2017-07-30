@@ -1,4 +1,6 @@
-#include "donate_details.inc"
+<?php
+include_once 'donate_details.inc.php';
+?>
 <form name="_xclick" action="https://www.paypal.com/yt/cgi-bin/webscr" method="post">
 <input type="hidden" name="cmd" value="_xclick">
 <input type="hidden" name="business" value="<?php echo $DONATE_ADDRESS;?>">
