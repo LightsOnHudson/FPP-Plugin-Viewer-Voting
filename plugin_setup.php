@@ -185,6 +185,8 @@ echo "</table> \n";
  {
  	
 	include $dontateFile;
+} else {
+	logEntry("No donate file exists");
 }
 ?>
 <br />
