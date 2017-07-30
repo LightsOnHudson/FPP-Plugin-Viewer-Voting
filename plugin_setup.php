@@ -9,6 +9,7 @@ $pluginName = "ViewerVoting";
 
 $pluginUpdateFile = $settings['pluginDirectory']."/".$pluginName."/"."pluginUpdate.inc";
 
+$dontateFile = "donate.inc.php";
 
 include_once 'functions.inc.php';
 include_once 'commonFunctions.inc.php';
@@ -180,6 +181,12 @@ echo "</table> \n";
 </form>
 </fieldset>
 </div>
-#include donate.inc.php
+<?
+ if(file_exists($dontateFile))
+ {
+ 	
+	include $dontateFile;
+}
+?>
 <br />
 </html>
