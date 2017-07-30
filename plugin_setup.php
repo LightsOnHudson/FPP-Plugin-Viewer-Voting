@@ -9,7 +9,7 @@ $pluginName = "ViewerVoting";
 
 $pluginUpdateFile = $settings['pluginDirectory']."/".$pluginName."/"."pluginUpdate.inc";
 
-$dontateFile = $settings['pluginDirectory']."/".$pluginName."/"."donate.inc.php";
+$dontateFile = $settings['pluginDirectory']."/".$pluginName."/"."donate.inc";
 
 include_once 'functions.inc.php';
 include_once 'commonFunctions.inc.php';
