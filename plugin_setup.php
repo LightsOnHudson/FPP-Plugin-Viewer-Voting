@@ -18,21 +18,29 @@ include_once 'version.inc';
 
 $myPid = getmypid();
 
+
+
 $gitURL = "https://github.com/LightsOnHudson/FPP-Plugin-Viewer-Voting.git";
 
 //arg0 is  the program
 //arg1 is the first argument in the registration this will be --list
 //$DEBUG=true;
 $logFile = $settings['logDirectory']."/".$pluginName.".log";
+
+$DEBUG = ReadSettingFromFile("DEBUG",$pluginName);
+$DEBUG = false;
+
 $sequenceExtension = ".fseq";
 
-logEntry("plugin update file: ".$pluginUpdateFile);
-logEntry("donate file: ".$dontateFile);
-//logEntry("open log file: ".$logFile);
+if($DEBUG) {
+	logEntry("plugin update file: ".$pluginUpdateFile);
+	logEntry("donate file: ".$dontateFile);
+	//logEntry("open log file: ".$logFile);
+}
 
 
 
-$DEBUG = false;
+
 
 if(isset($_POST['updatePlugin']))
 {
