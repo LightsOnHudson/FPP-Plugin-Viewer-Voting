@@ -188,8 +188,7 @@ echo "</table> \n";
 }
 ?>
 </form>
-</fieldset>
-</div>
+
 <?
  if(file_exists($dontateFile))
  {
@@ -199,5 +198,8 @@ echo "</table> \n";
 	logEntry("No donate file exists");
 }
 ?>
+<p/>
+</fieldset>
+</div>
 <br />
 </html>
