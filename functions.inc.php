@@ -1,5 +1,42 @@
 <?php
 
+
+
+function curl_to_host($method, $url, $headers, $data, &$resp_headers)
+	{
+	$ch=curl_init($url);
+	curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $GLOBALS['POST_TO_HOST.LINE_TIMEOUT']?$GLOBALS['POST_TO_HOST.LINE_TIMEOUT']:5);
+	curl_setopt($ch, CURLOPT_TIMEOUT, $GLOBALS['POST_TO_HOST.TOTAL_TIMEOUT']?$GLOBALS['POST_TO_HOST.TOTAL_TIMEOUT']:20);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, false);
+	curl_setopt($ch, CURLOPT_HEADER, 1);
+	
+	if ($method=='POST')
+	{curl_setopt($ch, CURLOPT_POST, true);
+	curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+	}
+	foreach ($headers as $k=>$v)
+	{$headers[$k]=str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', $k)))).': '.$v;
+	}
+	curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+	$rtn=curl_exec($ch);
+	curl_close($ch);
+	
+	$rtn=explode("\r\n\r\nHTTP/", $rtn, 2);    //to deal with "HTTP/1.1 100 Continue\r\n\r\nHTTP/1.1 200 OK...\r\n\r\n..." header
+	$rtn=(count($rtn)>1 ? 'HTTP/' : '').array_pop($rtn);
+	list($str_resp_headers, $rtn)=explode("\r\n\r\n", $rtn, 2);
+	
+	$str_resp_headers=explode("\r\n", $str_resp_headers);
+	array_shift($str_resp_headers);    //get rid of "HTTP/1.1 200 OK"
+	$resp_headers=array();
+	foreach ($str_resp_headers as $k=>$v)
+	{$v=explode(': ', $v, 2);
+	$resp_headers[$v[0]]=$v[1];
+	}
+	
+	return $rtn;
+}
+
 function checkForVotes($SERVER_IP, $API_TOKEN) {
 	
 	
@@ -9,7 +46,16 @@ function checkForVotes($SERVER_IP, $API_TOKEN) {
 	
 	$CHECK_VOTES_CMD = "http://". $SERVER_IP . "/FPPViewerVotingServer/server.php?token=".$API_TOKEN;
 	
-	
+	$method = "GET";
+	$data=array('API_TOKEN'=>$API_TOKEN,
+			'test' => "1"
+	);
+	//$rtn=curl_to_host('POST', 'http://test.com/send_by_device_token', array(), $data, $resp_headers);
+
+	$rtn = curl_to_host($method, $CHECK_VOTES_CMD, $headers, $data, $resp_headers);
+	echo $rtn;
+	var_export($resp_headers);
+	return;
 	
 	$ch = curl_init ();
 	curl_setopt ( $ch, CURLOPT_URL,trim($CHECK_VOTES_CMD));
