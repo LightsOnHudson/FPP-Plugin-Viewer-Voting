@@ -55,6 +55,13 @@ function checkForVotes($SERVER_IP, $API_TOKEN) {
 	foreach($data as $key => $value) {
 		logEntry("KEY: ".$key. " = ".$value);
 	}
+	
+	//there is  asingle array!
+	$CLIENT_TOKEN = $data[0]['CLIENT_TOKEN'];
+	$VOTES = $data[0]['VOTES'];
+	
+	logEntry("Client Token: ".$CLIENT_TOKEN);
+	logEntry("VOTES: ".$VOTES);
 }
 
 //create unique GUID:
