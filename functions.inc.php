@@ -44,7 +44,7 @@ function checkForVotes($SERVER_IP, $API_TOKEN) {
 	
 	
 	
-	$CHECK_VOTES_CMD = "http://". $SERVER_IP . "/FPPViewerVotingServer/server.php?token=".$API_TOKEN;
+	$CHECK_VOTES_CMD = "http://". $SERVER_IP . "/FPPViewerVotingServer/server.php?API_TOKEN=".$API_TOKEN;
 	
 	$method = "GET";
 	$data=array('API_TOKEN'=>$API_TOKEN,
