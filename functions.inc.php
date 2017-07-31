@@ -57,6 +57,9 @@ function checkForVotes($SERVER_IP, $API_TOKEN) {
 	var_export($resp_headers);
 	
 	$body = file_get_contents($CHECK_VOTES_CMD);
+	echo "BODY \n";
+	echo $body;
+	
 	var_export($http_response_header);
 	var_export($body);
 	return;
