@@ -63,6 +63,7 @@ function checkForVotes($SERVER_IP, $API_TOKEN) {
 	var_export($http_response_header);
 	var_export($body);
 	
+	echo "DOM test \n";
 	$html = file_get_contents($CHECK_VOTES_CMD);
 	libxml_use_internal_errors(true); //Prevents Warnings, remove if desired
 	$dom = new DOMDocument();
