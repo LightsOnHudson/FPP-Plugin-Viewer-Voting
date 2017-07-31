@@ -55,6 +55,10 @@ function checkForVotes($SERVER_IP, $API_TOKEN) {
 	$rtn = curl_to_host($method, $CHECK_VOTES_CMD, $headers, $data, $resp_headers);
 	echo $rtn;
 	var_export($resp_headers);
+	
+	$body = file_get_contents($CHECK_VOTES_CMD);
+	var_export($http_response_header);
+	var_export($body);
 	return;
 	
 	$ch = curl_init ();
