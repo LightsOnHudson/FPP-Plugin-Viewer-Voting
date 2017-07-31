@@ -62,6 +62,16 @@ function checkForVotes($SERVER_IP, $API_TOKEN) {
 	
 	var_export($http_response_header);
 	var_export($body);
+	
+	$html = file_get_contents($CHECK_VOTES_CMD);
+	libxml_use_internal_errors(true); //Prevents Warnings, remove if desired
+	$dom = new DOMDocument();
+	$dom->loadHTML($html);
+	$body = "";
+	foreach($dom->getElementsByTagName("body")->item(0)->childNodes as $child) {
+		$body .= $dom->saveHTML($child);
+	}
+	echo $body;
 	return;
 	
 	$ch = curl_init ();
