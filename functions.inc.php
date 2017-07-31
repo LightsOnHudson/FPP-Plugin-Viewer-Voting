@@ -50,6 +50,8 @@ function checkForVotes($SERVER_IP, $API_TOKEN) {
 	$json=str_replace('},]',"}]",$json);
 	$data = json_decode($json, TRUE);
 	
+	print_r($data);
+	
 	foreach($data as $key => $value) {
 		logEntry("KEY: ".$key. " = ".$value);
 	}
