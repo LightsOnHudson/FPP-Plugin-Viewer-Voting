@@ -46,46 +46,11 @@ function checkForVotes($SERVER_IP, $API_TOKEN) {
 	
 	$CHECK_VOTES_CMD = "http://". $SERVER_IP . "/FPPViewerVotingServer/server.php?API_TOKEN=".$API_TOKEN;
 	
-	$method = "GET";
-	$data=array('API_TOKEN'=>$API_TOKEN,
-			'test' => "1"
-	);
-	//$rtn=curl_to_host('POST', 'http://test.com/send_by_device_token', array(), $data, $resp_headers);
-
-	$rtn = curl_to_host($method, $CHECK_VOTES_CMD, $headers, $data, $resp_headers);
-	echo $rtn;
-	var_export($resp_headers);
-	
-	$body = file_get_contents($CHECK_VOTES_CMD);
-	echo "BODY \n";
-	echo $body;
-	
-	var_export($http_response_header);
-	var_export($body);
-	
-	echo "DOM test \n";
-	$html = file_get_contents($CHECK_VOTES_CMD);
-	libxml_use_internal_errors(true); //Prevents Warnings, remove if desired
-	$dom = new DOMDocument();
-	$dom->loadHTML($html);
-	$body = "";
-	foreach($dom->getElementsByTagName("body")->item(0)->childNodes as $child) {
-		$body .= $dom->saveHTML($child);
-	}
-	echo $body;
-	return;
-	
-	$ch = curl_init ();
-	curl_setopt ( $ch, CURLOPT_URL,trim($CHECK_VOTES_CMD));
-	
-	curl_setopt ( $ch, CURLOPT_RETURNTRANSFER, true );
-	curl_setopt ( $ch, CURLOPT_WRITEFUNCTION, 'do_nothing' );
-	curl_setopt ( $ch, CURLOPT_VERBOSE, false );
-	
-	$result = curl_exec ( $ch );
-	logEntry ( "Curl result: " . $result ); // $result;
-	curl_close ( $ch );
-	
+	$json = file_get_contents($CHECK_VOTES_CMD);
+	$data = json_decode($json, TRUE);
+	echo "<pre>";
+	print_r($data);
+	echo "</pre>";
 
 }
 
