@@ -1,5 +1,30 @@
 <?php
 
+function checkForVotes($SERVER_IP, $API_TOKEN) {
+	
+	
+	global $DEBUG;
+	
+	
+	
+	$CHECK_VOTES_CMD = "http://". $SERVER_IP . "/FPPViewerVotingServer/server.php?token=".$API_TOKEN;
+	
+	
+	
+	$ch = curl_init ();
+	curl_setopt ( $ch, CURLOPT_URL,trim($CHECK_VOTES_CMD));
+	
+	curl_setopt ( $ch, CURLOPT_RETURNTRANSFER, true );
+	curl_setopt ( $ch, CURLOPT_WRITEFUNCTION, 'do_nothing' );
+	curl_setopt ( $ch, CURLOPT_VERBOSE, false );
+	
+	$result = curl_exec ( $ch );
+	logEntry ( "Curl result: " . $result ); // $result;
+	curl_close ( $ch );
+	
+
+}
+
 //create unique GUID:
 function getGUID(){
 	if (function_exists('com_create_guid')){
@@ -51,75 +76,8 @@ function celciusToFarenheight($celcius) {
 	
 }
 
-//function to get all the falcon system elements
-function PrintFalconSystemsSelect() {
-	
-	return;
-}
 
 
-//get a specific falcon id object from an ip address status page
-function getFalconObjectValue($IP_ADDRESS, $objectName, $objectType) {
-	
-	global $DEBUG;
-	$elements = getAllFalconObjects($IP_ADDRESS);
-	
-	
-	$doc = new DOMDocument();
-	$doc->loadHTML($elements);
-	$xpath = new DOMXPath($doc);
-	
-	$result = $xpath->evaluate("//".$objectType."[@id='$objectName']");
-	foreach ($result as $node) {
-		
-		return $node->nodeValue;
-		
-	}
-}
-
-//get the processor temp
-//get all items and then get the processor temp
-function getProcessorTemp($IP_ADDRESS) {
-	
-	$elements = getAllFalconObjects($IP_ADDRESS);
-	
-	
-	$doc = new DOMDocument();
-	$doc->loadHTML($elements);
-	$xpath = new DOMXPath($doc);
-	
-	$result = $xpath->evaluate("//td[@id='fldChipTemp']");
-	foreach ($result as $node) {
-		
-		return $node->nodeValue;
-		
-	}
-			
-	
-}
-
-
-//get all the falcon telements
-function getAllFalconObjects($IP_ADDRESS) {
-	
-	global $DEBUG;
-	logEntry("Inside getting all falcon objects for ip address: ".$IP_ADDRESS);
-	
-	//for the falcon board
-	//index.htm
-	
-	$URL = "http://".$IP_ADDRESS."/index.htm";
-	//$elements= file_get_html($URL);
-	$elements = file_get_contents($URL);
-	return $elements;
-	//foreach($elements->find('element') as $ele) {
-		
-	//	print_r($ele);
-		
-	//}
-	
-	//return or output
-}
 
 function sendTCP($IP, $PORT, $cmd) {
 	
