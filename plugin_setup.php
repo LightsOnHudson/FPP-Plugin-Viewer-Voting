@@ -1,5 +1,5 @@
 <?php
-//$DEBUG=true;
+
 
 $skipJSsettings = 1;
 //include_once '/opt/fpp/www/config.php';
@@ -74,9 +74,32 @@ if(isset($_POST['submit']))
 	//$ENABLED = ReadSettingFromFile("ENABLED",$pluginName);
 	$ENABLED = urldecode($pluginSettings['ENABLED']);
 	
+	//run every minute!
+	$CRON_ENTRY = "1 * * * * /usr/bin/php ".$settings['pluginDirectory']."/".$pluginName."/".$UPDATE_IP_CMD." >> " . $logFile;
+	
+	switch ($ENABLED) {
+		
+		case "ON":
+			$cron_file = "/tmp/crontab.txt";
+			file_put_contents($cron_file, $CRON_ENTRY.PHP_EOL);
+			logEntry("Adding cron entry: ".$CRON_ENTRY." to cronjob");
+			exec("crontab $cron_file");
+			break;
+			
+		case "":
+			logEntry("Removing Cronjob(s)");
+			exec("crontab -r");
+			break;
+			
+		default:
+			logEntry("Removing Cronjob(s)");
+			exec("crontab -r");
+			break;
+			
+	}
 	
 	//test variables
-	$IP_ADDRESS = "10.0.0.106";
+
 ?>
 
 <html>
