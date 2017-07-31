@@ -43,6 +43,11 @@ if (file_exists($pluginConfigFile))
 	
 	$API_TOKEN= $pluginSettings['API_TOKEN'];
 	$SERVER_IP= $pluginSettings['SERVER_IP'];
+	
+	if($DEBUG) {
+		logEntry("API token: ".$API_TOKEN);
+		logEntry("SERVER IP :".$SERVER_IP);
+	}
 
 // = "357FED1F-60C6-C53A-38A4-B5EED9A08B33";
 checkForVotes($SERVER_IP, $API_TOKEN);
