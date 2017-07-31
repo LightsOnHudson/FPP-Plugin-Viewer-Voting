@@ -57,9 +57,14 @@ function checkForVotes($SERVER_IP, $API_TOKEN) {
 	}
 	
 	//there is  asingle array!
+	//check against the server
+	
 	$CLIENT_TOKEN = $data[0]['CLIENT_TOKEN'];
 	$VOTES = $data[0]['VOTES'];
 	
+	if($CLIENT_TOKEN == $API_TOKEN) {
+		logEntry("WE HAVE A MATCHING TOKEN YAY");
+	}
 	logEntry("Client Token: ".$CLIENT_TOKEN);
 	logEntry("VOTES: ".$VOTES);
 }
