@@ -35,7 +35,7 @@ $logFile = $settings['logDirectory']."/".$pluginName.".log";
 $DEBUG = ReadSettingFromFile("DEBUG",$pluginName);
 logEntry("Reading setting from file debug: ".$DEBUG);
 
-$pluginConfigFile = (__DIR__)."/plugin." .$pluginName;
+
 logEntry("PluginConfig File: ".$pluginConfigFile);
 
 if (file_exists($pluginConfigFile))
