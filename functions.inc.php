@@ -48,10 +48,10 @@ function checkForVotes($SERVER_IP, $API_TOKEN) {
 	
 	$json = file_get_contents($CHECK_VOTES_CMD);
 	$data = json_decode($json, TRUE);
-	echo "<pre>";
-	print_r($data);
-	echo "</pre>";
-
+	
+	foreach($data as $key => $value) {
+		logEntry("KEY: ".$key. " = ".$value);
+	}
 }
 
 //create unique GUID:
