@@ -1,7 +1,32 @@
 <?php
 
+//Send in new playlist to play based on votes
+//Change the configured/running schedule file with the new playlist
+//need a DEFAULT playlist in the event that there is no votes
+//that will run in REPEAT mode
+//then gracefully shutdown the playlist
+//reload the FPPD to read the current schedule
+//restart fppd.. or reload. whichever.
+function loadNewPlaylist($playlist) {
+	
+	global $DEBUG,  $settings;
+	
+	$LOAD_RESULT = false;
+	
+	logEntry("Loading a new Playlist: ".$playlist);
+	
+	logEntry("FPP Bin dir: ".$settings['fppDir']);
+	
+	
+	
+	
+	return $LOAD_RESULT;
+	
+}
 
 
+//update the plugin from gitHub! 
+//TODO: should update to just trigger the script!
 function updatePluginFromGitHub($gitURL, $branch="master", $pluginName) {
 	
 	

@@ -114,12 +114,6 @@ function tryGetHost($ip)
 			return $string;
 }
 
-//celcius to farenhieht
-function celciusToFarenheight($celcius) {
-	return round(((9/5)*$celcius)+32);
-	
-}
-
 
 
 
