@@ -52,6 +52,7 @@ if (file_exists($pluginConfigFile))
 // = "357FED1F-60C6-C53A-38A4-B5EED9A08B33";
 checkForVotes($SERVER_IP, $API_TOKEN);
 
+$playlist= "VOTE_TEST";
 
 $LOAD_RESULT = loadNewPlaylist($playlist);
 

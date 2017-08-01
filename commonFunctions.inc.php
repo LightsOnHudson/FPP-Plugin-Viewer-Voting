@@ -17,6 +17,8 @@ function loadNewPlaylist($playlist) {
 	
 	logEntry("FPP Bin dir: ".$settings['fppDir']);
 	
+	//FPP FPPD location need to fix based on the platform!
+	$FPPD_LOCATION = $settings['fppDir']."/fppd";
 	
 	
 	
