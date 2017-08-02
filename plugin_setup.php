@@ -62,9 +62,9 @@ if(isset($_POST['submit']))
 	//	echo "Writring config fie <br/> \n";
 
 
-//	WriteSettingToFile("PROJ_PASSWORD",urlencode($_POST["PROJ_PASSWORD"]),$pluginName);
+	WriteSettingToFile("API_TOKEN",urlencode($_POST["API_TOKEN"]),$pluginName);
 
-	
+	sleep(1);
 
 } 
 
@@ -72,31 +72,11 @@ if(isset($_POST['submit']))
 	
 	
 	//$ENABLED = ReadSettingFromFile("ENABLED",$pluginName);
-	$ENABLED = urldecode($pluginSettings['ENABLED']);
+	//$ENABLED = ReadSettingFromFile("ENABLED",$pluginName);
 	
-	//run every minute!
-	$CRON_ENTRY = "1 * * * * /usr/bin/php ".$settings['pluginDirectory']."/".$pluginName."/".$UPDATE_IP_CMD." >> " . $logFile;
+	$API_TOKEN =  ReadSettingFromFile("API_TOKEN",$pluginName);
 	
-	switch ($ENABLED) {
-		
-		case "ON":
-			$cron_file = "/tmp/crontab.txt";
-			file_put_contents($cron_file, $CRON_ENTRY.PHP_EOL);
-			logEntry("Adding cron entry: ".$CRON_ENTRY." to cronjob");
-			exec("crontab $cron_file");
-			break;
-			
-		case "":
-			logEntry("Removing Cronjob(s)");
-			exec("crontab -r");
-			break;
-			
-		default:
-			logEntry("Removing Cronjob(s)");
-			exec("crontab -r");
-			break;
-			
-	}
+	
 	
 	//test variables
 
@@ -121,7 +101,7 @@ if(isset($_POST['submit']))
 <li></li>
 </ul>
 
-<form method="post" action="http://<? echo $_SERVER['SERVER_ADDR'].":".$_SERVER['SERVER_PORT']?>/plugin.php?plugin=ViewerVoting&page=plugin_setup.php">
+<form method="post" action="http://<? echo $_SERVER['SERVER_ADDR'].":".$_SERVER['SERVER_PORT']?>/plugin.php?plugin=<?php echo $pluginName;?>&page=plugin_setup.php">
 <br>
 <p/>
 
@@ -140,59 +120,9 @@ echo "ENABLE PLUGIN: ";
 //}
 echo "<p/>\n";
 
-//get a list of falcon controllers
-echo "<table border=\1\" cellspacing=\"3\" cellpadding=\"3\"> \n";
+echo "Client Token: \n";
+echo "<input type=\"text\" name=\"API_TOKEN\" value=\"".$API_TOKEN."\"> \n";
 
-echo "<th colspan=\"4\"> \n";
-echo "Viewer Voting \n";
-echo "</th> \n";
-echo "<tr> \n";
-
-echo "<td> \n";
-echo "IP Address \n";
-echo "</td> \n";
-echo "<td> \n";
-echo "Hostname \n";
-echo "</td> \n";
-echo "<td> \n";
-echo "Uptime \n";
-echo "</td> \n";
-echo "<td> \n";
-echo "Processor Temp \n";
-echo "</td> \n";
-echo "<td> \n";
-echo "Active/configured Universes \n";
-echo "</td> \n";
-echo "</tr> \n";
-
-echo "<tr> \n";
-echo "<td> \n";
-
-echo $IP_ADDRESS;
-echo "</td> \n";
-
-echo "<td> \n";
-
-echo "</td> \n";
-
-echo "<td> \n";
-
-echo "</td> \n";
-
-
-echo "<td> \n";
-echo $temp_processor;
-echo "(C) \n";
-
-echo $farenheight_temp_processor;
-echo "(F) \n";
-echo "</td> \n";
-echo "<td> \n";
-
-echo "</td> \n";
-echo "</tr> \n";
-
-echo "</table> \n";
 
 
 ?>
