@@ -60,13 +60,32 @@ function checkForVotes($SERVER_IP, $API_TOKEN) {
 	//check against the server
 	
 	$CLIENT_TOKEN = $data[0]['CLIENT_TOKEN'];
-	$VOTES = $data[0]['VOTES'];
+	$SITE_ENABLED = $data[0]['SITE_ENABLED'];
 	
 	if($CLIENT_TOKEN == $API_TOKEN) {
 		logEntry("WE HAVE A MATCHING TOKEN YAY");
 	}
 	logEntry("Client Token: ".$CLIENT_TOKEN);
-	logEntry("VOTES: ".$VOTES);
+	logEntry("SITE_ENABLED: ".$SITE_ENABLED);
+	
+	if(!$SITE_ENABLED) {
+		if($DEBUG) {
+			logEntry("SITE IS NOT ENABLED ON THE SERVER");
+			exit(0);
+		}
+	} elseif($SITE_ENABLED) {
+		if($DEBUG) {
+			logEntry("SITE IS ENABLED");
+			
+		}
+		
+	}
+	//site is enabled - continue checking to get vote data (if it exists)
+	$SEQUENCE = $data[0]['SEQUENCE'];
+	$VOTES = $data[0]['VOTES'];
+	$LAST_READ = $data[0]['LAST_VOTE_TIMESTAMP'];
+	
+	
 }
 
 //create unique GUID:
