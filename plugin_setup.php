@@ -121,7 +121,7 @@ echo "ENABLE PLUGIN: ";
 echo "<p/>\n";
 
 echo "Client Token: \n";
-echo "<input type=\"text\" name=\"API_TOKEN\" value=\"".$API_TOKEN."\"> \n";
+echo "<input size=\"64\" type=\"text\" name=\"API_TOKEN\" value=\"".$API_TOKEN."\"> \n";
 
 
 
