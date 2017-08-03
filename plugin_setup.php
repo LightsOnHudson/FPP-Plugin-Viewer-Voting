@@ -51,8 +51,19 @@ if(isset($_POST['updatePlugin']))
 	echo $updateResult."<br/> \n";
 }
 
-if(isset($_POST['submit']))
-{
+if(isset($_POST['sync_sequnces'])) {
+	
+	//the sync sequences was pressed
+	logEntry("Syncing sequences");
+	
+	$SEQUENCE_DIR = $settings['sequenceDirectory'];
+	logEntry("Sequence directory: ".$SEQUENCE_DIR);
+	$SEQUENCE_ARRAY = directoryToArray($directory, $recursive);
+	
+	print_r($SEQUENCE_ARRAY);
+	
+	
+} elseif(isset($_POST['submit'])) {
 	
 
 	
@@ -128,6 +139,8 @@ echo "<input size=\"64\" type=\"text\" name=\"API_TOKEN\" value=\"".$API_TOKEN."
 ?>
 <p/>
 <input id="submit_button" name="submit" type="submit" class="buttons" value="Save Config">
+
+<input id="sync_sequences" name="sync_sequnces" type="submit" class="buttons" value="Sync Sequnences">
 </form>
 
 
