@@ -63,8 +63,8 @@ if(isset($_POST['sync_sequnces'])) {
 	
 	print_r($SEQUENCE_ARRAY);
 	
-	continue;
-	
+	//continue;
+	break;
 	
 } elseif(isset($_POST['sync_playlists'])) {
 	
@@ -77,7 +77,8 @@ if(isset($_POST['sync_sequnces'])) {
 	
 	print_r($PLAYLIST_ARRAY);
 	
-	continue;
+	//continue;
+	break;
 	
 } elseif(isset($_POST['save_config'])) {
 
