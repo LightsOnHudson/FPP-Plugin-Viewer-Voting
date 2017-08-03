@@ -54,7 +54,7 @@ function checkForVotes($SERVER_IP, $API_TOKEN) {
 	if($DEBUG) {
 		logEntry("JSON data back from server: ".$SERVER_IP);
 		
-		foreach($data as $key => $value) {
+		foreach($data[0] as $key => $value) {
 			logEntry("KEY: ".$key. " = ".$value);
 		}
 		
@@ -85,10 +85,8 @@ function checkForVotes($SERVER_IP, $API_TOKEN) {
 		}
 		
 	}
-	//site is enabled - continue checking to get vote data (if it exists)
-	$SEQUENCE = $data[0]['SEQUENCE'];
-	$VOTES = $data[0]['VOTES'];
-	$LAST_READ = $data[0]['LAST_VOTE_TIMESTAMP'];
+	
+	return $data;
 	
 	
 }

@@ -50,7 +50,13 @@ if (file_exists($pluginConfigFile))
 	}
 
 // = "357FED1F-60C6-C53A-38A4-B5EED9A08B33";
-checkForVotes($SERVER_IP, $API_TOKEN);
+$VOTE_DATA = checkForVotes($SERVER_IP, $API_TOKEN);
+
+//site is enabled - continue checking to get vote data (if it exists)
+$SEQUENCE = $VOTE_DATA[0]['SEQUENCE'];
+$FSEQ = $VOTE_DATA[0]['FSEQ'];
+$VOTES = $VOTE_DATA[0]['VOTES'];
+$LAST_READ = $VOTE_DATA[0]['LAST_VOTE_TIMESTAMP'];
 
 $playlist= "VOTE_TEST";
 
