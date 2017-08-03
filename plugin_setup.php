@@ -71,7 +71,7 @@ if(isset($_POST['sync_sequnces'])) {
 	//the sync sequences was pressed
 	logEntry("Syncing playlists");
 	
-	$PLAYLIST_DIR = $settings['mediaDirectory']."playlists/";
+	$PLAYLIST_DIR = $settings['mediaDirectory']."/playlists/";
 	logEntry("playlist directory: ".$PLAYLIST_DIR);
 	$PLAYLIST_ARRAY = directoryToArray($PLAYLIST_DIR, $recursive);
 	
