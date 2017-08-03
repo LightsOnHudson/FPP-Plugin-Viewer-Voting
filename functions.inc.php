@@ -50,11 +50,16 @@ function checkForVotes($SERVER_IP, $API_TOKEN) {
 	
 	$data = json_decode($json, TRUE);
 	
-	print_r($data);
-	
-	foreach($data as $key => $value) {
-		logEntry("KEY: ".$key. " = ".$value);
+	//print_r($data);
+	if($DEBUG) {
+		logEntry("JSON data back from server: ".$SERVER_IP);
+		
+		foreach($data as $key => $value) {
+			logEntry("KEY: ".$key. " = ".$value);
+		}
+		
 	}
+	
 	
 	//there is  asingle array!
 	//check against the server
