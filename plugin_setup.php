@@ -60,10 +60,27 @@ if(isset($_POST['sync_sequnces'])) {
 	logEntry("Sequence directory: ".$SEQUENCE_DIR);
 	$SEQUENCE_ARRAY = directoryToArray($SEQUENCE_DIR, $recursive);
 	
+	
 	print_r($SEQUENCE_ARRAY);
 	
+	continue;
 	
-} elseif(isset($_POST['submit'])) {
+	
+} elseif(isset($_POST['sync_playlists'])) {
+	
+	//the sync sequences was pressed
+	logEntry("Syncing playlists");
+	
+	$PLAYLIST_DIR = $settings['playlistDirectory'];
+	logEntry("playlist directory: ".$PLAYLIST_DIR);
+	$PLAYLIST_ARRAY = directoryToArray($PLAYLIST_DIR, $recursive);
+	
+	print_r($PLAYLIST_ARRAY);
+	
+	continue;
+	
+} elseif(isset($_POST['save_config'])) {
+
 	
 
 	
@@ -138,9 +155,12 @@ echo "<input size=\"64\" type=\"text\" name=\"API_TOKEN\" value=\"".$API_TOKEN."
 
 ?>
 <p/>
-<input id="submit_button" name="submit" type="submit" class="buttons" value="Save Config">
+<input id="submit_button" name="save_config" type="submit" class="buttons" value="Save Config">
 
 <input id="sync_sequences" name="sync_sequnces" type="submit" class="buttons" value="Sync Sequnences">
+
+<input id="sync_playlists" name="sync_playlists" type="submit" class="buttons" value="Sync Playlists">
+
 </form>
 
 
