@@ -58,7 +58,7 @@ if(isset($_POST['sync_sequnces'])) {
 	
 	$SEQUENCE_DIR = $settings['sequenceDirectory'];
 	logEntry("Sequence directory: ".$SEQUENCE_DIR);
-	$SEQUENCE_ARRAY = directoryToArray($directory, $recursive);
+	$SEQUENCE_ARRAY = directoryToArray($SEQUENCE_DIR, $recursive);
 	
 	print_r($SEQUENCE_ARRAY);
 	
