@@ -87,14 +87,14 @@ shell_exec($CMD_RELOAD_SCHEDULE);
 
 //STOP the fppd daemon
 //then restart it
-$CMD_FPPD_STOP = "/opt/fpp/scripts/fppd_stop";
+$CMD_FPPD_STOP = "/usr/bin/sudo /opt/fpp/scripts/fppd_stop";
 if($DEBUG) {
 	logEntry("Stopping fppd to have the schedule take effect!!!");
 }
 shell_exec($CMD_FPPD_STOP);
 
 //start the ffpd
-$CMD_FPPD_START = "/opt/fpp/scripts/fppd_start";
+$CMD_FPPD_START = "/usr/bin/sudo /opt/fpp/scripts/fppd_start";
 if($DEBUG) {
 	logEntry("Starting the fppd to have the schedule take effect!!!");
 	
