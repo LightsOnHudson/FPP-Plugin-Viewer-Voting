@@ -8,6 +8,10 @@ ob_implicit_flush();
 //include_once '/opt/fpp/www/config.php';
 include_once '/opt/fpp/www/common.php';
 
+//FPP BIN DIR
+//TODO: need to get this from the fpp settings!
+$FPP_BIN = $settings['fppBinDir']."/fpp";
+
 $pluginName = "ViewerVoting";
 
 $pluginUpdateFile = $settings['pluginDirectory']."/".$pluginName."/"."pluginUpdate.inc";
@@ -70,6 +74,16 @@ if($DEBUG) {
 //replace the playlist in the schedule
 
 $UPDATE_PLAYLIST_IN_SCHEDULE = updatePlaylistInSchedule($SEQUENCE);
+
+
+//the new playlist has been loaded into the schedule!!!
+//now tell the FPP binary to reload the schedule
+$CMD_RELOAD_SCHEDULE = $FPP_BIN." -R";
+if($DEBUG) {
+	logEntry("Reloading schedule cmd: ".$CMD_RELOAD_SCHEDULE);
+	
+}
+shell_exec($CMD_RELOAD_SCHEDULE);
 
 
 $playlist= "VOTE_TEST";
