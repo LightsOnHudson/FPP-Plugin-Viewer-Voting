@@ -25,8 +25,9 @@ function updatePlaylistInSchedule($SEQUENCE) {
 	$scheduleDataArray = explode(",", $scheduleData);
 	
 	//remove the file
-	unset($scheduleFile);
+	unlink($scheduleFile);
 	
+	sleep(1);
 	$scheduleDataArray[1] = $SEQUENCE;
 	if($DEBUG) {
 		logEntry("Writing new playlist: ".$SEQUENCE." into schedule array");
