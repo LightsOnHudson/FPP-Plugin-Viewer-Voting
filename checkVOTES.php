@@ -56,10 +56,11 @@ if($DEBUG) {
 	print_r($VOTE_DATA);
 }
 //site is enabled - continue checking to get vote data (if it exists)
-$SEQUENCE = $VOTE_DATA[0]['SEQUENCE'];
+$SEQUENCE = $VOTE_DATA[0]['FSEQ'];
 $FSEQ = $VOTE_DATA[0]['FSEQ'];
 $VOTES = $VOTE_DATA[0]['VOTES'];
 $LAST_READ = $VOTE_DATA[0]['LAST_VOTE_TIMESTAMP'];
+$SITE_ENABLED = $VOTE_DATA[0]['SITE_ENABLED'];
 
 if($DEBUG) {
 	logEntry("Sequence/Playlist: ".$SEQUENCE);
