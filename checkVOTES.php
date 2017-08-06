@@ -58,6 +58,11 @@ $FSEQ = $VOTE_DATA[0]['FSEQ'];
 $VOTES = $VOTE_DATA[0]['VOTES'];
 $LAST_READ = $VOTE_DATA[0]['LAST_VOTE_TIMESTAMP'];
 
+//replace the playlist in the schedule
+
+$UPDATE_PLAYLIST_IN_SCHEDULE = updatePlaylistInSchedule($SEQUENCE);
+
+
 $playlist= "VOTE_TEST";
 
 $LOAD_RESULT = loadNewPlaylist($playlist);
