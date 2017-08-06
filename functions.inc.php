@@ -9,12 +9,18 @@ function updatePlaylistInSchedule($SEQUENCE) {
 	
 	$scheduleFile = $settings['mediaDirectory']."/schedule";
 	
+	if($DEBUG) {
+		logEntry("Schedule file: ".$scheduleFile);
+	}
+	
 	//a sample schedule file looks like
 	//fpp@FPPVM1:~/media$ more schedule
 	//1,PlaylistTWO,7,00,30,00,23,30,00,1,2017-07-31,2099-12-31,
 	//there are 12 values, the 2nd value is the one we want to replace!
 	
 	$scheduleData = file_get_contents($scheduleFile);
+	if($DEBUG)
+			print_r($scheduleData);
 	
 	$scheduleDataArray = explode(",", $scheduleData);
 	
@@ -22,7 +28,10 @@ function updatePlaylistInSchedule($SEQUENCE) {
 	unset($scheduleFile);
 	
 	$scheduleDataArray[1] = $SEQUENCE;
-	
+	if($DEBUG) {
+		logEntry("Writing new playlist: ".$SEQUENCE." into schedule array");
+		print_r($scheduleDataArray);
+	}
 	$NEWScheduleData = implode(",",$scheduleDataArray);
 	
 	file_put_contents($scheduleFile,$NEWScheduleData);
