@@ -20,7 +20,7 @@ function updatePlaylistInSchedule($SEQUENCE) {
 	
 	$scheduleData = file_get_contents($scheduleFile);
 	if($DEBUG)
-			print_r($scheduleData);
+//			print_r($scheduleData);
 	
 	$scheduleDataArray = explode(",", $scheduleData);
 	
@@ -31,7 +31,7 @@ function updatePlaylistInSchedule($SEQUENCE) {
 	$scheduleDataArray[1] = $SEQUENCE;
 	if($DEBUG) {
 		logEntry("Writing new playlist: ".$SEQUENCE." into schedule array");
-		print_r($scheduleDataArray);
+//		print_r($scheduleDataArray);
 	}
 	$NEWScheduleData = implode(",",$scheduleDataArray);
 	
@@ -80,8 +80,6 @@ function checkForVotes($SERVER_IP, $API_TOKEN) {
 	
 	global $DEBUG;
 	
-	
-	
 	$CHECK_VOTES_CMD = "http://". $SERVER_IP . "/FPPViewerVotingServer/server.php?API_TOKEN=".$API_TOKEN;
 	
 	$json = file_get_contents($CHECK_VOTES_CMD);
@@ -125,7 +123,6 @@ function checkForVotes($SERVER_IP, $API_TOKEN) {
 	}
 	
 	return $data;
-	
 	
 }
 
