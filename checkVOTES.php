@@ -1,44 +1,25 @@
 #!/usr/bin/php
 <?php
 error_reporting(0);
-//added Dec 3 2015
-ob_implicit_flush();
+ob_flush();flush();
 
-
-//include_once '/opt/fpp/www/config.php';
-include_once '/opt/fpp/www/common.php';
-
+$DEBUG = false;
+$skipJSsettings = 1;
 //FPP BIN DIR
+require_once('/opt/fpp/www/common.php');
+$skipJSsettings = 1;
 //TODO: need to get this from the fpp settings!
 $FPP_BIN = $settings['fppBinDir']."/fpp";
 
 $pluginName = "ViewerVoting";
 
-$pluginUpdateFile = $settings['pluginDirectory']."/".$pluginName."/"."pluginUpdate.inc";
-
 $pluginConfigFile = $settings['configDirectory'] . "/plugin." .$pluginName;
-
-$dontateFile = $settings['pluginDirectory']."/".$pluginName."/"."donate.inc.php";
 
 include_once 'functions.inc.php';
 include_once 'commonFunctions.inc.php';
 
-include_once 'version.inc';
-
 $myPid = getmypid();
-
-
-
-$gitURL = "https://github.com/LightsOnHudson/FPP-Plugin-Viewer-Voting.git";
-
-//arg0 is  the program
-//arg1 is the first argument in the registration this will be --list
-//$DEBUG=true;
 $logFile = $settings['logDirectory']."/".$pluginName.".log";
-
-$DEBUG = ReadSettingFromFile("DEBUG",$pluginName);
-logEntry("Reading setting from file debug: ".$DEBUG);
-
 
 logEntry("PluginConfig File: ".$pluginConfigFile);
 
@@ -47,6 +28,7 @@ if (file_exists($pluginConfigFile))
 	
 	$API_TOKEN= $pluginSettings['API_TOKEN'];
 	$SERVER_IP= $pluginSettings['SERVER_IP'];
+	$DEBUG = $pluginSettings['DEBUG'];
 	
 	if($DEBUG) {
 		logEntry("API token: ".$API_TOKEN);
