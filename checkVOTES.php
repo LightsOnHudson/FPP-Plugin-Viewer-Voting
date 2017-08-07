@@ -38,9 +38,12 @@ if (file_exists($pluginConfigFile))
 // = "357FED1F-60C6-C53A-38A4-B5EED9A08B33";
 $VOTE_DATA = checkForVotes($SERVER_IP, $API_TOKEN);
 
-if($DEBUG) {
-	print_r($VOTE_DATA);
-}
+
+logEntry("Back from getting server vote data");
+
+foreach($VOTE_DATA[0] as $key => $value) {
+        logEntry("KEY: ".$key. " = ".$value);
+        }
 //site is enabled - continue checking to get vote data (if it exists)
 $SEQUENCE = $VOTE_DATA[0]['FSEQ'];
 $FSEQ = $VOTE_DATA[0]['FSEQ'];
