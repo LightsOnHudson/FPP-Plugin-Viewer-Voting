@@ -10,7 +10,7 @@ function sendSequencesToServer($SERVER_IP, $API_TOKEN, $SEQUENCE_ARRAY) {
 	
 	$content = json_encode($SEQUENCE_ARRAY);
 	$json = json_encode($SEQUENCE_ARRAY, JSON_PRETTY_PRINT);
-	
+	$CHECK_VOTES_CMD = "http://". $SERVER_IP . "/FPPViewerVotingServer/sync.php?SYNC_CMD=SEQUENCES&API_TOKEN=".$API_TOKEN."&SEQUENCES=".$SEQUENCES;
 	//echo it out so it can be retrieved by the client!
 	//echo $json;
 	logEntry("json send to server: ".$json);
@@ -20,8 +20,8 @@ function sendSequencesToServer($SERVER_IP, $API_TOKEN, $SEQUENCE_ARRAY) {
 	curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 	//curl_setopt($curl, CURLOPT_HTTPHEADER,
 	//		array("Content-type: application/json"));
-	curl_setopt($curl, CURLOPT_POST, true);
-	curl_setopt($curl, CURLOPT_POSTFIELDS, $content);
+	//curl_setopt($curl, CURLOPT_POST, true);
+	//curl_setopt($curl, CURLOPT_POSTFIELDS, $content);
 	
 	$json_response = curl_exec($curl);
 	
