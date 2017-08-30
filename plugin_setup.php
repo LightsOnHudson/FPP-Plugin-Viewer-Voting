@@ -66,9 +66,17 @@ if(isset($_POST['sync_sequnces'])) {
 	
 	$SEQUENCE_DIR = $settings['sequenceDirectory'];
 	logEntry("Sequence directory: ".$SEQUENCE_DIR);
-	$SEQUENCE_ARRAY = directoryToArray($SEQUENCE_DIR, $recursive);
+	$TMP_SEQUENCE_ARRAY = directoryToArray($SEQUENCE_DIR, $recursive);
 	$API_TOKEN= $pluginSettings['API_TOKEN'];
 	$SERVER_IP= $pluginSettings['SERVER_IP'];
+	
+	//just use the base file name when building the array
+	$SEQUENCE_ARRAY = array();
+	
+	foreach ($TMP_SEQUENCE_ARRAY as $seq) {
+		$SEQUENCE_ARRAY[] = basename($seq).PHP_EOL;
+	}
+	
 	
 	print_r($SEQUENCE_ARRAY);
 	sendSequencesToServer($SERVER_IP, $API_TOKEN, $SEQUENCE_ARRAY);
