@@ -5,10 +5,11 @@ function sendSequencesToServer($SERVER_IP, $API_TOKEN, $SEQUENCE_ARRAY) {
 	
 	global $DEBUG;
 	$CHECK_VOTES_CMD = "http://". $SERVER_IP . "/FPPViewerVotingServer/sync.php?SYNC_CMD=SEQUENCES&API_TOKEN=".$API_TOKEN;
-	$url = "your url";
-	$content = json_encode("your data to be sent");
 	
-	$curl = curl_init($url);
+	
+	$content = json_encode($SEQUENCE_ARRAY);
+	
+	$curl = curl_init($CHECK_VOTES_CMD);
 	curl_setopt($curl, CURLOPT_HEADER, false);
 	curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 	curl_setopt($curl, CURLOPT_HTTPHEADER,
@@ -28,6 +29,7 @@ function sendSequencesToServer($SERVER_IP, $API_TOKEN, $SEQUENCE_ARRAY) {
 	curl_close($curl);
 	
 	$response = json_decode($json_response, true);
+	logEntry("JSON response from sync: ".$response);
 }
 
 //update the playlist in the schedule with the passed filename!
