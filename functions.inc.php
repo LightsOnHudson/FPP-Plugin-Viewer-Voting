@@ -1,8 +1,10 @@
 <?php
 
 //send sequences to server with API token
-function sendSequencesToServer($API_TOKEN, $SEQUENCES) {
+function sendSequencesToServer($SERVER_IP, $API_TOKEN, $SEQUENCE_ARRAY) {
 	
+	global $DEBUG;
+	$CHECK_VOTES_CMD = "http://". $SERVER_IP . "/FPPViewerVotingServer/sync.php?SYNC_CMD=SEQUENCES&API_TOKEN=".$API_TOKEN;
 	$url = "your url";
 	$content = json_encode("your data to be sent");
 	

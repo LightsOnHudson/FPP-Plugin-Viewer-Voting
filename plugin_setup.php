@@ -31,6 +31,9 @@ $logFile = $settings['logDirectory']."/".$pluginName.".log";
 
 logEntry("PluginConfig File: ".$pluginConfigFile);
 
+if (file_exists($pluginConfigFile))
+	$pluginSettings = parse_ini_file($pluginConfigFile);
+
 $DEBUG = $pluginSettings['DEBUG'];
 
 logEntry("Reading setting from file debug: ".$DEBUG);
@@ -64,10 +67,11 @@ if(isset($_POST['sync_sequnces'])) {
 	$SEQUENCE_DIR = $settings['sequenceDirectory'];
 	logEntry("Sequence directory: ".$SEQUENCE_DIR);
 	$SEQUENCE_ARRAY = directoryToArray($SEQUENCE_DIR, $recursive);
-	
+	$API_TOKEN= $pluginSettings['API_TOKEN'];
+	$SERVER_IP= $pluginSettings['SERVER_IP'];
 	
 	print_r($SEQUENCE_ARRAY);
-	sendSequencesToServer($API_TOKEN, $SEQUENCES)
+	sendSequencesToServer($SERVER_IP, $API_TOKEN, $SEQUENCE_ARRAY);
 	//continue;
 	//break;
 	
@@ -99,12 +103,14 @@ if(isset($_POST['sync_sequnces'])) {
 	WriteSettingToFile("API_TOKEN",urlencode($_POST["API_TOKEN"]),$pluginName);
 
 	sleep(1);
+	
+	if (file_exists($pluginConfigFile))
+		$pluginSettings = parse_ini_file($pluginConfigFile);
 
 } 
 
 
-if (file_exists($pluginConfigFile))
-	$pluginSettings = parse_ini_file($pluginConfigFile);
+
 	
 	$API_TOKEN= $pluginSettings['API_TOKEN'];
 	$SERVER_IP= $pluginSettings['SERVER_IP'];
@@ -113,7 +119,7 @@ if (file_exists($pluginConfigFile))
 	//$ENABLED = ReadSettingFromFile("ENABLED",$pluginName);
 	//$ENABLED = ReadSettingFromFile("ENABLED",$pluginName);
 	
-	$API_TOKEN =  ReadSettingFromFile("API_TOKEN",$pluginName);
+//	$API_TOKEN =  ReadSettingFromFile("API_TOKEN",$pluginName);
 	
 	
 	
