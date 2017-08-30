@@ -11,6 +11,8 @@ $pluginUpdateFile = $settings['pluginDirectory']."/".$pluginName."/"."pluginUpda
 
 $dontateFile = $settings['pluginDirectory']."/".$pluginName."/"."donate.inc.php";
 
+$pluginConfigFile = $settings['configDirectory'] . "/plugin." .$pluginName;
+
 include_once 'functions.inc.php';
 include_once 'commonFunctions.inc.php';
 
@@ -27,7 +29,10 @@ $gitURL = "https://github.com/LightsOnHudson/FPP-Plugin-Viewer-Voting.git";
 //$DEBUG=true;
 $logFile = $settings['logDirectory']."/".$pluginName.".log";
 
-$DEBUG = ReadSettingFromFile("DEBUG",$pluginName);
+logEntry("PluginConfig File: ".$pluginConfigFile);
+
+$DEBUG = $pluginSettings['DEBUG'];
+
 logEntry("Reading setting from file debug: ".$DEBUG);
 
 //$DEBUG = false;
@@ -62,7 +67,7 @@ if(isset($_POST['sync_sequnces'])) {
 	
 	
 	print_r($SEQUENCE_ARRAY);
-	
+	sendSequencesToServer($API_TOKEN, $SEQUENCES)
 	//continue;
 	//break;
 	
@@ -98,6 +103,11 @@ if(isset($_POST['sync_sequnces'])) {
 } 
 
 
+if (file_exists($pluginConfigFile))
+	$pluginSettings = parse_ini_file($pluginConfigFile);
+	
+	$API_TOKEN= $pluginSettings['API_TOKEN'];
+	$SERVER_IP= $pluginSettings['SERVER_IP'];
 	
 	
 	//$ENABLED = ReadSettingFromFile("ENABLED",$pluginName);
