@@ -4,13 +4,14 @@
 function sendSequencesToServer($SERVER_IP, $API_TOKEN, $SEQUENCE_ARRAY) {
 	
 	global $DEBUG;
-	$CHECK_VOTES_CMD = "http://". $SERVER_IP . "/FPPViewerVotingServer/sync.php?SYNC_CMD=SEQUENCES&API_TOKEN=".$API_TOKEN;
+	
 	
 	$SEQUENCES = implode(",", $SEQUENCE_ARRAY);
 	
+	$SYNC_URL_CMD = "http://". $SERVER_IP . "/FPPViewerVotingServer/sync.php?SYNC_CMD=SEQUENCES&API_TOKEN=".$API_TOKEN."&SEQUENCES=".$SEQUENCES;
 	
-	
-	$curl = curl_init($CHECK_VOTES_CMD);
+	logEntry("SEQUENCE SYNC STRING TO SERVER: ".$SERVER_IP." ".$SYNC_URL_CMD);
+	$curl = curl_init($SYNC_URL_CMD);
 	curl_setopt($curl, CURLOPT_HEADER, false);
 	curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 	
