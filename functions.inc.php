@@ -11,6 +11,7 @@ function sendSequencesToServer($SERVER_IP, $API_TOKEN, $SEQUENCE_ARRAY) {
 	$SYNC_URL_CMD = "http://". $SERVER_IP . "/FPPViewerVotingServer/sync.php?SYNC_CMD=SEQUENCES&API_TOKEN=".$API_TOKEN."&SEQUENCES=".$SEQUENCES;
 	
 	logEntry("SEQUENCE SYNC STRING TO SERVER: ".$SERVER_IP." ".$SYNC_URL_CMD);
+	
 	$curl = curl_init(urlencode($SYNC_URL_CMD));
 	curl_setopt($curl, CURLOPT_HEADER, false);
 	curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
