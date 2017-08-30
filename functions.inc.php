@@ -13,14 +13,14 @@ function sendSequencesToServer($SERVER_IP, $API_TOKEN, $SEQUENCE_ARRAY) {
 	$CHECK_VOTES_CMD = "http://". $SERVER_IP . "/FPPViewerVotingServer/sync.php?SYNC_CMD=SEQUENCES&API_TOKEN=".$API_TOKEN."&SEQUENCES=".$SEQUENCES;
 	//echo it out so it can be retrieved by the client!
 	//echo $json;
-	logEntry("json send to server: ".$json);
+	logEntry(" send to server: ".$CHECK_VOTES_CMD);
 	
 	$curl = curl_init($CHECK_VOTES_CMD);
 	curl_setopt($curl, CURLOPT_HEADER, false);
 	curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 	//curl_setopt($curl, CURLOPT_HTTPHEADER,
 	//		array("Content-type: application/json"));
-	//curl_setopt($curl, CURLOPT_POST, true);
+	curl_setopt($curl, CURLOPT_POST, false);
 	//curl_setopt($curl, CURLOPT_POSTFIELDS, $content);
 	
 	$json_response = curl_exec($curl);
