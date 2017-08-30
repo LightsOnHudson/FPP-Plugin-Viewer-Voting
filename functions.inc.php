@@ -8,6 +8,11 @@ function sendSequencesToServer($SERVER_IP, $API_TOKEN, $SEQUENCE_ARRAY) {
 	
 	
 	$content = json_encode($SEQUENCE_ARRAY);
+	$json = json_encode($SEQUENCE_ARRAY, JSON_PRETTY_PRINT);
+	
+	//echo it out so it can be retrieved by the client!
+	//echo $json;
+	logEntry("json send to server: ".$json);
 	
 	$curl = curl_init($CHECK_VOTES_CMD);
 	curl_setopt($curl, CURLOPT_HEADER, false);
