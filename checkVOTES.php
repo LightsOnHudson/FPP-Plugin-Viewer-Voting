@@ -217,6 +217,10 @@ if($PLAY_IN_LAST_COUNT == 0) {
 				
 			
 		} else {
+			
+			if($DEBUG) {
+				logEntry("Sequence: ".$SEQUENCE." has NOT played in the last ".$PLAY_IN_LAST_COUNT);
+			}
 	
 				//check to see if the playlist is in the array
 			if(in_array($SEQUENCE, $PLAYED_SEQUENCE_ARRAY) &&  $PLAYLIST_COUNT < $VOTE_COUNT) {
@@ -236,14 +240,14 @@ if($PLAY_IN_LAST_COUNT == 0) {
 			//	$LAST_VOTED_PLAYLISTS = implode(",", $PLAYED_SEQUENCE_ARRAY);
 			//	WriteSettingToFile("LAST_VOTED_PLAYLISTS",urlencode($LAST_VOTED_PLAYLISTS),$pluginName);
 				//reset the count to 1
-			//	WriteSettingToFile("PLAYLIST_COUNT",0,$pluginName);
+				WriteSettingToFile("PLAYLIST_COUNT",0,$pluginName);
 				$SEQUENCE = $PLAYLIST_NAME;
 			} else {
 				//reset the playlist count because we got a NEW vote
 			//	$LAST_VOTED_PLAYLISTS = implode(",", $PLAYED_SEQUENCE_ARRAY);
 			//	WriteSettingToFile("LAST_VOTED_PLAYLISTS",urlencode($LAST_VOTED_PLAYLISTS),$pluginName);
 				//reset the count to 1
-			//	WriteSettingToFile("PLAYLIST_COUNT",0,$pluginName);
+				WriteSettingToFile("PLAYLIST_COUNT",0,$pluginName);
 			}
 		
 		}
