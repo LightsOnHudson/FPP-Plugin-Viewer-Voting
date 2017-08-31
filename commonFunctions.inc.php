@@ -217,11 +217,11 @@ function directoryToArray($directory, $recursive) {
 function checkEventFilesForKey($keyCheckString) {
 	global $settings;
 	
-
+	$eventDirectory = $settings['mediaDirectory']."/events";
 	$keyExist = false;
 	$eventFiles = array();
 
-	$eventFiles = directoryToArray($settings['eventDirectory'], false);
+	$eventFiles = directoryToArray($eventDirectory, false);
 	foreach ($eventFiles as $eventFile) {
 
 		if( strpos(file_get_contents($eventFile),$keyCheckString) !== false) {
@@ -250,7 +250,8 @@ function createViewerVotingEventFiles() {
 	
 	$EVENT_FILE=false;
 	
-
+	//there is not event directory in the settings!!!
+	$eventDirectory = $settings['mediaDirectory']."/events";
 					
 					//check to see that the file doesnt already exist - do a grep and return contents
 					$EVENT_CHECK = checkEventFilesForKey("CHECK-VOTES");
