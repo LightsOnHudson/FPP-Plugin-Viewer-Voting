@@ -121,14 +121,14 @@ if($DEBUG) {
 //then restart it
 $CMD_FPPD_STOP = "/usr/bin/sudo /opt/fpp/scripts/fppd_stop";
 if($DEBUG) {
-	logEntry("Stopping fppd to have the schedule take effect!!!");
+//	logEntry("Stopping fppd to have the schedule take effect!!!");
 }
 //shell_exec($CMD_FPPD_STOP);
 
 //start the ffpd
 $CMD_FPPD_START = "/usr/bin/sudo /opt/fpp/scripts/fppd_start";
 if($DEBUG) {
-	logEntry("Starting the fppd to have the schedule take effect!!!");
+//	logEntry("Starting the fppd to have the schedule take effect!!!");
 	
 }
 //shell_exec($CMD_FPPD_START);
@@ -144,17 +144,18 @@ if($DEBUG) {
 logEntry("VOTE COUNT: ".$VOTE_COUNT);
 logEntry("Last playlist count: ".$PLAYLIST_COUNT);
 
-if($DEBUG) {
-	logEntry("Pushing: ".$SEQUENCE." to end of array and then writing it out");
-}
+//if($DEBUG) {
+//	logEntry("Pushing: ".$SEQUENCE." to end of array and then writing it out");
+//}
 
-array_push($PLAYED_SEQUENCE_ARRAY, $SEQUENCE);
+///array_push($PLAYED_SEQUENCE_ARRAY, $SEQUENCE);
 
 if($PLAY_IN_LAST_COUNT == 0) {
 	if($DEBUG) {
 		logEntry("Play last in count is Zero");
 	}
 	//it is disabled. just allow this to run!
+	array_push($PLAYED_SEQUENCE_ARRAY, $SEQUENCE);
 	//reset the playlist count because we got a NEW vote
 	$LAST_VOTED_PLAYLISTS = implode(",", $PLAYED_SEQUENCE_ARRAY);
 	WriteSettingToFile("LAST_VOTED_PLAYLISTS",urlencode($LAST_VOTED_PLAYLISTS),$pluginName);
@@ -196,8 +197,8 @@ if($PLAY_IN_LAST_COUNT == 0) {
 				logEntry("Playlist: ".$pl);
 			}
 		}
-		$LAST_VOTED_PLAYLISTS = implode(",", $PLAYED_SEQUENCE_ARRAY);
-		WriteSettingToFile("LAST_VOTED_PLAYLISTS",urlencode($LAST_VOTED_PLAYLISTS),$pluginName);
+		//$LAST_VOTED_PLAYLISTS = implode(",", $PLAYED_SEQUENCE_ARRAY);
+		//WriteSettingToFile("LAST_VOTED_PLAYLISTS",urlencode($LAST_VOTED_PLAYLISTS),$pluginName);
 	//reset the array to the highest $PLAY_IN_LAST_COUNT
 	
 		//check to see if the sequence has played in the play lin last count
@@ -209,10 +210,10 @@ if($PLAY_IN_LAST_COUNT == 0) {
 				$SEQUENCE = $PLAYLIST_NAME;
 				
 				//push it to the end of the array
-				array_push($PLAYED_SEQUENCE_ARRAY, $SEQUENCE);
-				//write it out
-				$LAST_VOTED_PLAYLISTS = implode(",", $PLAYED_SEQUENCE_ARRAY);
-				WriteSettingToFile("LAST_VOTED_PLAYLISTS",urlencode($LAST_VOTED_PLAYLISTS),$pluginName);
+			//	array_push($PLAYED_SEQUENCE_ARRAY, $SEQUENCE);
+			//	//write it out
+			//	$LAST_VOTED_PLAYLISTS = implode(",", $PLAYED_SEQUENCE_ARRAY);
+			//	WriteSettingToFile("LAST_VOTED_PLAYLISTS",urlencode($LAST_VOTED_PLAYLISTS),$pluginName);
 				
 			
 		} else {
@@ -231,18 +232,18 @@ if($PLAY_IN_LAST_COUNT == 0) {
 				//write the last one to the config file
 				//put it back to a string to save it!
 				//add the playlist to the last played //voted playlists... so it can flish out.
-				array_push($PLAYED_SEQUENCE_ARRAY, $PLAYLIST_NAME);
-				$LAST_VOTED_PLAYLISTS = implode(",", $PLAYED_SEQUENCE_ARRAY);
-				WriteSettingToFile("LAST_VOTED_PLAYLISTS",urlencode($LAST_VOTED_PLAYLISTS),$pluginName);
+			//	array_push($PLAYED_SEQUENCE_ARRAY, $PLAYLIST_NAME);
+			//	$LAST_VOTED_PLAYLISTS = implode(",", $PLAYED_SEQUENCE_ARRAY);
+			//	WriteSettingToFile("LAST_VOTED_PLAYLISTS",urlencode($LAST_VOTED_PLAYLISTS),$pluginName);
 				//reset the count to 1
-				WriteSettingToFile("PLAYLIST_COUNT",0,$pluginName);
+			//	WriteSettingToFile("PLAYLIST_COUNT",0,$pluginName);
 				$SEQUENCE = $PLAYLIST_NAME;
 			} else {
 				//reset the playlist count because we got a NEW vote
-				$LAST_VOTED_PLAYLISTS = implode(",", $PLAYED_SEQUENCE_ARRAY);
-				WriteSettingToFile("LAST_VOTED_PLAYLISTS",urlencode($LAST_VOTED_PLAYLISTS),$pluginName);
+			//	$LAST_VOTED_PLAYLISTS = implode(",", $PLAYED_SEQUENCE_ARRAY);
+			//	WriteSettingToFile("LAST_VOTED_PLAYLISTS",urlencode($LAST_VOTED_PLAYLISTS),$pluginName);
 				//reset the count to 1
-				WriteSettingToFile("PLAYLIST_COUNT",0,$pluginName);
+			//	WriteSettingToFile("PLAYLIST_COUNT",0,$pluginName);
 			}
 		
 		}
@@ -250,7 +251,10 @@ if($PLAY_IN_LAST_COUNT == 0) {
 logEntry("Loading playlist/sequence: ".$SEQUENCE);
 
 $PLAY_RESULT = playNewSequence($SEQUENCE);
-
+//push what we played to the end!!!
+array_push($PLAYED_SEQUENCE_ARRAY, $SEQUENCE);
+$LAST_VOTED_PLAYLISTS = implode(",", $PLAYED_SEQUENCE_ARRAY);
+WriteSettingToFile("LAST_VOTED_PLAYLISTS",urlencode($LAST_VOTED_PLAYLISTS),$pluginName);
 
 
 
