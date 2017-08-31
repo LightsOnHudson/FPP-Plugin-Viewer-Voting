@@ -242,9 +242,9 @@ if($PLAY_IN_LAST_COUNT == 0) {
 			
 			//it is NOT the array however it has not allowed to play the number of times.
 			if($DEBUG) {
-				logEntry("Sequence: ".$SEQUENCE." is NOT the last played list");
+				logEntry("Sequence: ".$SEQUENCE." is NOT the last played count of ".$VOTE_COUNT." in the list");
 			}
-			$PLAYLIST_COUNT = 0;
+			$PLAYLIST_COUNT = 1;
 			//WriteSettingToFile("PLAYLIST_COUNT",$PLAYLIST_COUNT,$pluginName);
 		
 		}
