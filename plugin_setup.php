@@ -134,9 +134,6 @@ if(isset($_POST['sync_sequnces'])) {
 	if((int)$VOTE_COUNT <=0) {
 		$VOTE_COUNT = 1;
 	}
-	if((int)$PLAY_IN_LAST_COUNT<=0) {
-		$PLAY_IN_LAST_COUNT = 3;
-	}
 	
 	//$ENABLED = ReadSettingFromFile("ENABLED",$pluginName);
 	//$ENABLED = ReadSettingFromFile("ENABLED",$pluginName);
@@ -223,7 +220,7 @@ echo "<p/>\n";
 
 echo "<p/>\n";
 
-echo "Play in Last Count (A voted on sequence CANNOT play if it has already played in the last X sequences): \n";
+echo "Play in Last Count (A voted on sequence CANNOT play if it has already played in the last X sequences) a ZERO disables this: \n";
 echo "<input size=\"3\" type=\"text\" name=\"PLAY_IN_LAST_COUNT\" value=\"".$PLAY_IN_LAST_COUNT."\"> \n";
 echo "<p/>\n";
 
