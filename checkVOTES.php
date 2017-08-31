@@ -139,6 +139,14 @@ if($DEBUG) {
 logEntry("VOTE COUNT: ".$VOTE_COUNT);
 logEntry("Last playlist count: ".$PLAYLIST_COUNT);
 
+if($DEBUG) {
+	logEntry("Pushing: ".$SEQUENCE." to end of array and then writing it out");
+}
+
+array_push($PLAYED_SEQUENCE_ARRAY, $SEQUENCE);
+
+
+
 if($LAST_VOTED_PLAYLISTS == $SEQUENCE &&  $PLAYLIST_COUNT < $VOTE_COUNT) {
 	
 	$PLAYLIST_COUNT++;
@@ -150,13 +158,16 @@ if($LAST_VOTED_PLAYLISTS == $SEQUENCE &&  $PLAYLIST_COUNT < $VOTE_COUNT) {
 	//go ahead and allow this and write it as the last voted
 	//but DO NOT write the playlist they want to use here, because otherwise it would not get there on the next catch
 	//write the last one to the config file
-	WriteSettingToFile("LAST_VOTED_PLAYLISTS",urlencode($SEQUENCE),$pluginName);
+	//put it back to a string to save it!
+	$LAST_VOTED_PLAYLISTS = implode(",", $PLAYED_SEQUENCE_ARRAY);
+	WriteSettingToFile("LAST_VOTED_PLAYLISTS",urlencode($LAST_VOTED_PLAYLISTS),$pluginName);
 	//reset the count to 1
 	WriteSettingToFile("PLAYLIST_COUNT",0,$pluginName);
 	$SEQUENCE = $PLAYLIST_NAME;
 } else {
 	//reset the playlist count because we got a NEW vote
-	WriteSettingToFile("LAST_VOTED_PLAYLISTS",urlencode($SEQUENCE),$pluginName);
+	$LAST_VOTED_PLAYLISTS = implode(",", $PLAYED_SEQUENCE_ARRAY);
+	WriteSettingToFile("LAST_VOTED_PLAYLISTS",urlencode($LAST_VOTED_PLAYLISTS),$pluginName);
 	//reset the count to 1
 	WriteSettingToFile("PLAYLIST_COUNT",0,$pluginName);
 }
