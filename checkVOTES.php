@@ -3,7 +3,7 @@
 error_reporting(0);
 ob_flush();flush();
 
-$DEBUG = false;
+
 $skipJSsettings = 1;
 //FPP BIN DIR
 require_once('/opt/fpp/www/common.php');
@@ -74,12 +74,13 @@ if (file_exists($pluginConfigFile))
 // = "357FED1F-60C6-C53A-38A4-B5EED9A08B33";
 $VOTE_DATA = checkForVotes($SERVER_IP, $API_TOKEN);
 
-
-logEntry("Back from getting server vote data");
-
-foreach($VOTE_DATA[0] as $key => $value) {
-        logEntry("KEY: ".$key. " = ".$value);
-        }
+if($DEBUG) {
+	logEntry("Back from getting server vote data");
+	
+	foreach($VOTE_DATA[0] as $key => $value) {
+	        logEntry("KEY: ".$key. " = ".$value);
+	        }
+}
 //site is enabled - continue checking to get vote data (if it exists)
 $SEQUENCE = $VOTE_DATA[0]['FSEQ'];
 $FSEQ = $VOTE_DATA[0]['FSEQ'];
@@ -140,10 +141,10 @@ if($DEBUG) {
 
 //check to see if the last playlist name is the current one 
 //if so, then use the PLAYLIST 
-
-logEntry("VOTE COUNT: ".$VOTE_COUNT);
-logEntry("Last playlist count: ".$PLAYLIST_COUNT);
-
+if($DEBUG) {
+	logEntry("VOTE COUNT: ".$VOTE_COUNT);
+	logEntry("Last playlist count: ".$PLAYLIST_COUNT);
+}
 //if($DEBUG) {
 //	logEntry("Pushing: ".$SEQUENCE." to end of array and then writing it out");
 //}
@@ -191,12 +192,14 @@ if($PLAY_IN_LAST_COUNT == 0) {
 		//WriteSettingToFile("LAST_VOTED_PLAYLISTS",urlencode($LAST_VOTED_PLAYLISTS),$pluginName);
 		if($DEBUG)
 			logEntry("Shwoing new array after trimming");
-			
-		foreach ($PLAYED_SEQUENCE_ARRAY as $pl) {
+		
 			if($DEBUG) {
-				logEntry("Playlist: ".$pl);
+				foreach ($PLAYED_SEQUENCE_ARRAY as $pl) {
+					
+						logEntry("Playlist: ".$pl);
+					
+				}
 			}
-		}
 		//$LAST_VOTED_PLAYLISTS = implode(",", $PLAYED_SEQUENCE_ARRAY);
 		//WriteSettingToFile("LAST_VOTED_PLAYLISTS",urlencode($LAST_VOTED_PLAYLISTS),$pluginName);
 	//reset the array to the highest $PLAY_IN_LAST_COUNT
@@ -249,6 +252,8 @@ if($PLAY_IN_LAST_COUNT == 0) {
 		
 		}
 }
+
+if($DEBUG)
 logEntry("Loading playlist/sequence: ".$SEQUENCE);
 
 $PLAY_RESULT = playNewSequence($SEQUENCE);
