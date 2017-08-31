@@ -63,6 +63,17 @@ $VOTES = $VOTE_DATA[0]['VOTES'];
 $LAST_READ = $VOTE_DATA[0]['LAST_VOTE_TIMESTAMP'];
 $SITE_ENABLED = $VOTE_DATA[0]['SITE_ENABLED'];
 
+//if the sequence is blank(fseq) thent he server may not have any votes for that.
+//replace with the Playlist
+if($VOTES == 0 || $SEQUENCE == "") {
+	$SEQUENCE = $PLAYLIST_NAME;
+	
+	logEntry("Site did not have any votes or the FSEQ was blank: replacing with the playlist name: ".$PLAYLIST_NAME);
+	$PLAY_RESULT = playNewSequence($SEQUENCE);
+	//exiting here
+	exit(0);
+}
+
 if($DEBUG) {
 	logEntry("Sequence/Playlist: ".$SEQUENCE);
 	
