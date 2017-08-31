@@ -135,6 +135,9 @@ if(isset($_POST['sync_sequnces'])) {
 		$VOTE_COUNT = 1;
 	}
 	
+	if((int)$PLAY_IN_LAST_COUNT<=0) {
+		$PLAY_IN_LAST_COUNT = 0;
+	}
 	//$ENABLED = ReadSettingFromFile("ENABLED",$pluginName);
 	//$ENABLED = ReadSettingFromFile("ENABLED",$pluginName);
 	
