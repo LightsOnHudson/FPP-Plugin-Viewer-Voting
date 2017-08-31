@@ -151,6 +151,9 @@ if($DEBUG) {
 array_push($PLAYED_SEQUENCE_ARRAY, $SEQUENCE);
 
 if($PLAY_IN_LAST_COUNT = 0) {
+	if($DEBUG) {
+		logEntry("Play last in count is Zero");
+	}
 	//it is disabled. just allow this to run!
 	//reset the playlist count because we got a NEW vote
 	$LAST_VOTED_PLAYLISTS = implode(",", $PLAYED_SEQUENCE_ARRAY);
