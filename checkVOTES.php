@@ -150,7 +150,7 @@ if($DEBUG) {
 
 array_push($PLAYED_SEQUENCE_ARRAY, $SEQUENCE);
 
-if($PLAY_IN_LAST_COUNT = 0) {
+if($PLAY_IN_LAST_COUNT == 0) {
 	if($DEBUG) {
 		logEntry("Play last in count is Zero");
 	}
