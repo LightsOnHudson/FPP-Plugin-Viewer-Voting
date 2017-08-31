@@ -21,6 +21,7 @@ include_once 'commonFunctions.inc.php';
 $myPid = getmypid();
 $logFile = $settings['logDirectory']."/".$pluginName.".log";
 
+if($DEBUG)
 logEntry("PluginConfig File: ".$pluginConfigFile);
 
 if (file_exists($pluginConfigFile))

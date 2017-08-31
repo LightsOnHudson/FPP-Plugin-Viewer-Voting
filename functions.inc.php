@@ -142,21 +142,24 @@ function checkForVotes($SERVER_IP, $API_TOKEN) {
 	$SITE_ENABLED = $data[0]['SITE_ENABLED'];
 	
 	if($CLIENT_TOKEN == $API_TOKEN) {
-		logEntry("WE HAVE A MATCHING TOKEN YAY");
-	}
-	logEntry("Client Token: ".$CLIENT_TOKEN);
-	logEntry("SITE_ENABLED: ".$SITE_ENABLED);
-	
-	if(!$SITE_ENABLED) {
 		if($DEBUG) {
+			logEntry("WE HAVE A MATCHING TOKEN YAY");
+		}
+	}
+	if($DEBUG) {
+		logEntry("Client Token: ".$CLIENT_TOKEN);
+		logEntry("SITE_ENABLED: ".$SITE_ENABLED);
+	}
+	if(!$SITE_ENABLED) {
+		//if($DEBUG) {
 			logEntry("SITE IS NOT ENABLED ON THE SERVER");
 			exit(0);
-		}
+		//}
 	} elseif($SITE_ENABLED) {
-		if($DEBUG) {
-			logEntry("SITE IS ENABLED");
+		//if($DEBUG) {
+			logEntry("SITE IS ENABLED ON SERVER");
 			
-		}
+		//}
 		
 	}
 	
