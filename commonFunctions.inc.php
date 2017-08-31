@@ -238,10 +238,13 @@ function checkEventFilesForKey($keyCheckString) {
 
 function createViewerVotingEventFiles() {
 	
-	global $settings; //$eventDirectory,$pluginDirectory,$pluginName,$scriptDirectory,$DEVICE_CONNECTION_TYPE,$DEVICE;
-	
-	
-	
+	global $DEBUG, $settings; 
+	if($DEBUG)
+		logEntry("Inside: ".__FUNCTION__,1,__FILE__,__LINE__);
+		
+	foreach ($settings as $key => $value) {
+		logEntry("Settings: ".$key. " has value: ".$value);
+	}
 	
 	//echo "next event file name available: ".$nextEventFilename."\n";
 	
