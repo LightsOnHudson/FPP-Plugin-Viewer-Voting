@@ -109,6 +109,9 @@ if(isset($_POST['sync_sequnces'])) {
 	WriteSettingToFile("VOTE_COUNT",urlencode($_POST["VOTE_COUNT"]),$pluginName);
 	WriteSettingToFile("PLAYLIST_NAME",urlencode($_POST["PLAYLIST_NAME"]),$pluginName);
 	WriteSettingToFile("API_TOKEN",urlencode($_POST["API_TOKEN"]),$pluginName);
+	
+	//reset the playlist count to 0 when saving a new config!!
+	WriteSettingToFile("PLAYLIST_COUNT",0,$pluginName);
 
 	sleep(1);
 	
