@@ -168,10 +168,7 @@ if($PLAY_IN_LAST_COUNT == 0) {
 		logentry("Played sequence array count: ".count($PLAYED_SEQUENCE_ARRAY));
 	}
 	//need to reset the array! while the count is >
-	if(count($PLAYED_SEQUENCE_ARRAY) > $PLAY_IN_LAST_COUNT) {
-		if($DEBUG) {
-			logEntry("Played sequence count is > Played in last value: ".$PLAY_IN_LAST_COUNT);
-		}
+
 		while(count($PLAYED_SEQUENCE_ARRAY) > $PLAY_IN_LAST_COUNT) {
 			if($DEBUG) {
 				logEntry("Current cound of play sequence array: ".coung($PLAYED_SEQUENCE_ARRAY));
@@ -182,8 +179,11 @@ if($PLAY_IN_LAST_COUNT == 0) {
 			
 		
 		} 
-	}
-		
+	
+		if($DEBUG){
+			logEntry("Array reset to : ".$PLAY_IN_LAST_COUNT);
+			logEntry("Count of array is ".count($PLAYED_SEQUENCE_ARRAY));
+		}
 			
 		
 
