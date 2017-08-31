@@ -164,6 +164,9 @@ if($PLAY_IN_LAST_COUNT == 0) {
 	
 } else {
 
+	if($DEBUG) {
+		logentry("Played sequence array count: ".count($PLAYED_SEQUENCE_ARRAY));
+	}
 	//need to reset the array! while the count is >
 	if(count($PLAYED_SEQUENCE_ARRAY) > $PLAY_IN_LAST_COUNT) {
 		do {
