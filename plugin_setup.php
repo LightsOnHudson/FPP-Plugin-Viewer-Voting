@@ -126,7 +126,7 @@ if(isset($_POST['sync_sequnces'])) {
 	$VOTE_COUNT= $pluginSettings['VOTE_COUNT'];
 	
 	//set default!
-	if(int($VOTE_COUNT) <=0) {
+	if((int)$VOTE_COUNT <=0) {
 		$VOTE_COUNT = 1;
 	}
 	
