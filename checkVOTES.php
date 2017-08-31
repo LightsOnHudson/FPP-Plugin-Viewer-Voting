@@ -165,14 +165,20 @@ if($PLAY_IN_LAST_COUNT == 0) {
 } else {
 
 	//need to reset the array! while the count is >
-	while(count($PLAYED_SEQUENCE_ARRAY) > $PLAY_IN_LAST_COUNT) {
-		
+	if(count($PLAYED_SEQUENCE_ARRAY) > $PLAY_IN_LAST_COUNT) {
+		do {
 			array_shift($PLAYED_SEQUENCE_ARRAY);
-		if($DEBUG) {
-			logEntry("Current cound of play sequence array: ".coung($PLAYED_SEQUENCE_ARRAY));
-			logEntry("Removing an entry off the sequence played sequence array to get it below the coung: ".$PLAY_IN_LAST_COUNT);
-		}
-	} 
+			if($DEBUG) {
+				logEntry("Current cound of play sequence array: ".coung($PLAYED_SEQUENCE_ARRAY));
+				logEntry("Removing an entry off the sequence played sequence array to get it below the coung: ".$PLAY_IN_LAST_COUNT);
+			}
+		
+		} while(count($PLAYED_SEQUENCE_ARRAY) > $PLAY_IN_LAST_COUNT);
+	}
+		
+			
+		
+
 	
 	//reset the array to the highest $PLAY_IN_LAST_COUNT
 	
