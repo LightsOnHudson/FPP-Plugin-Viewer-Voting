@@ -239,7 +239,7 @@ function checkEventFilesForKey($keyCheckString) {
 
 function createViewerVotingEventFiles() {
 	
-	global $DEBUG, $settings; 
+	global $DEBUG, $settings, $pluginName; 
 	if($DEBUG)
 		logEntry("Inside: ".__FUNCTION__,1,__FILE__,__LINE__);
 		
@@ -274,7 +274,7 @@ function createViewerVotingEventFiles() {
 						//	echo "eventData: ".$eventData."<br/>\n";
 						file_put_contents($eventDirectory."/".$nextEventFilename, $eventData);
 						
-						$scriptCMD = $pluginDirectory."/".$pluginName."/"."checkVOTES.php";
+						$scriptCMD = $settings['pluginDirectory']."/".$pluginName."/"."checkVOTES.php";
 						createScriptFile("checkVotes.sh",$scriptCMD);
 					} else {
 						logEntry("Event file exists for this exiiting");
