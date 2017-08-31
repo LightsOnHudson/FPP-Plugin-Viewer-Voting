@@ -224,16 +224,25 @@ if($PLAY_IN_LAST_COUNT == 0) {
 			
 			$PLAYLIST_COUNT = 0;
 				
-		} elseif(!in_array($SEQUENCE, $PLAYED_SEQUENCE_ARRAY) &&  $PLAYLIST_COUNT < $VOTE_COUNT) {
-			
+		//} elseif(!in_array($SEQUENCE, $PLAYED_SEQUENCE_ARRAY) &&  $PLAYLIST_COUNT < $VOTE_COUNT) {
+		} elseif($PLAYLIST_COUNT < $VOTE_COUNT) {
 			//it is NOT the array however it has not allowed to play the number of times.
 			if($DEBUG) {
-				logEntry("Sequence: ".$SEQUENCE." is NOT the last played");
+				logEntry("Sequence: ".$SEQUENCE." has not played the amount of allowed voted counts");
 			}
-			$PLAYLIST_COUNT++;
+			$PLAYLIST_COUNT ++;
 			//WriteSettingToFile("PLAYLIST_COUNT",$PLAYLIST_COUNT,$pluginName);
 			
 				
+		}elseif(!in_array($SEQUENCE, $PLAYED_SEQUENCE_ARRAY)) {
+			
+			//it is NOT the array however it has not allowed to play the number of times.
+			if($DEBUG) {
+				logEntry("Sequence: ".$SEQUENCE." is NOT the last played list");
+			}
+			$PLAYLIST_COUNT = 0;
+			//WriteSettingToFile("PLAYLIST_COUNT",$PLAYLIST_COUNT,$pluginName);
+		
 		}
 }
 logEntry("Loading playlist/sequence: ".$SEQUENCE);
