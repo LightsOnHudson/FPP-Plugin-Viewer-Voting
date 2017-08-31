@@ -123,6 +123,12 @@ function createScriptFile($scriptFilename,$scriptCMD) {
 	$fs = fopen($scriptFilename,"w");
 	fputs($fs, $data);
 	fclose($fs);
+	
+	//mark the file executable
+	$CHMOD_CMD = "/usr/bin/sudo /bin/chmod +x ".$scriptFilename;
+	
+	logEntry("making the script execuable: ".$scriptFilename);
+	shell_exec($CHMOD_CMD);
 
 }
 //return the next event file available for use
