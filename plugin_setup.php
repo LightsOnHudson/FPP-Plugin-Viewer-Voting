@@ -146,6 +146,17 @@ if(isset($_POST['sync_sequnces'])) {
 	
 	
 	//test variables
+	
+	$LAST_VOTED_PLAYLISTS = urldecode($pluginSettings['LAST_VOTED_PLAYLISTS']);
+	
+	//load it into the array!
+	//if there is no comma just push the value into the array!
+	$pos = strpos($LAST_VOTED_PLAYLISTS, ",");
+	if ($pos === false) {
+		array_push($PLAYED_SEQUENCE_ARRAY, $LAST_VOTED_PLAYLISTS);
+	} else {
+		$PLAYED_SEQUENCE_ARRAY = explode(",", $LAST_VOTED_PLAYLISTS);
+	}
 
 ?>
 
@@ -176,6 +187,24 @@ if(isset($_POST['sync_sequnces'])) {
 
 echo "VER: ".$VERSION;
 echo "<br/> \n";
+
+//output the last played tables
+if(count($PLAYED_SEQUENCE_ARRAY) > 0) {
+	
+	echo "<table border=\"1\" cellspacing=\"3\" cellpadding=\"3\"> \n";
+	echo "<th colspan=\"3\"> \n";
+	echo "Last played Sequences (oldest to newest)\n";
+	echo "</th> \n";
+	foreach ($PLAYED_SEQUENCE_ARRAY as $pl) {
+		echo "<tr> \n";
+		echo "<td> \n";
+		echo urldecode($pl);
+		echo "</td> \n";
+		echo "</tr> \n";
+	}
+	
+	echo "</table> \n";
+}
 
 echo "ENABLE PLUGIN: ";
 
