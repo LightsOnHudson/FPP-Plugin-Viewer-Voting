@@ -217,6 +217,7 @@ function directoryToArray($directory, $recursive) {
 function checkEventFilesForKey($keyCheckString) {
 	global $settings;
 	
+	logEntry("Checking event files for the key: ".$keyCheckString);
 	$eventDirectory = $settings['mediaDirectory']."/events";
 	$keyExist = false;
 	$eventFiles = array();
@@ -257,6 +258,7 @@ function createViewerVotingEventFiles() {
 					$EVENT_CHECK = checkEventFilesForKey("CHECK-VOTES");
 					if(!$EVENT_CHECK)
 					{
+						logEntry("There is not an event file for this . creating one");
 						
 						$nextEventFilename = getNextEventFilename();
 						$MAJOR=substr($nextEventFilename,0,2);
@@ -274,6 +276,8 @@ function createViewerVotingEventFiles() {
 						
 						$scriptCMD = $pluginDirectory."/".$pluginName."/"."checkVOTES.php";
 						createScriptFile("checkVotes.sh",$scriptCMD);
+					} else {
+						logEntry("Event file exists for this exiiting");
 					}
 				
 				
