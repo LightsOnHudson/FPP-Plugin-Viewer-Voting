@@ -258,7 +258,7 @@ function createViewerVotingEventFiles() {
 					$EVENT_CHECK = checkEventFilesForKey("CHECK-VOTES");
 					if(!$EVENT_CHECK)
 					{
-						logEntry("There is not an event file for this . creating one");
+						logEntry("There is not an event file for this CHECK-VOTES creating one");
 						
 						$nextEventFilename = getNextEventFilename();
 						$MAJOR=substr($nextEventFilename,0,2);
