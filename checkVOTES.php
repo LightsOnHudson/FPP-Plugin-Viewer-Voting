@@ -186,8 +186,16 @@ if($PLAY_IN_LAST_COUNT == 0) {
 			logEntry("Count of array is ".count($PLAYED_SEQUENCE_ARRAY));
 		}
 			
-		
-
+		//$LAST_VOTED_PLAYLISTS = implode(",", $PLAYED_SEQUENCE_ARRAY);
+		//WriteSettingToFile("LAST_VOTED_PLAYLISTS",urlencode($LAST_VOTED_PLAYLISTS),$pluginName);
+		if($DEBUG)
+			logEntry("Shwoing new array after trimming");
+			
+		foreach ($PLAYED_SEQUENCE_ARRAY as $pl) {
+			if($DEBUG) {
+				logEntry("Playlist: ".$pl);
+			}
+		}
 	
 	//reset the array to the highest $PLAY_IN_LAST_COUNT
 	
