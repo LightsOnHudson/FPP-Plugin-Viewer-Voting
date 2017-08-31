@@ -169,6 +169,9 @@ if($PLAY_IN_LAST_COUNT == 0) {
 	}
 	//need to reset the array! while the count is >
 	if(count($PLAYED_SEQUENCE_ARRAY) > $PLAY_IN_LAST_COUNT) {
+		if($DEBUG) {
+			logEntry("Played sequence count is > Played in last value: ".$PLAY_IN_LAST_COUNT);
+		}
 		do {
 			array_shift($PLAYED_SEQUENCE_ARRAY);
 			if($DEBUG) {
