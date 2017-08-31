@@ -56,7 +56,7 @@ if (file_exists($pluginConfigFile))
 	
 	if($DEBUG) {
 		//show the array in logentry
-		foreach ($LAST_VOTED_PLAYLISTS as $pl) {
+		foreach ($PLAYED_SEQUENCE_ARRAY as $pl) {
 			logEntry("Playlist in last voted playlists: ".$pl);
 		}
 	}
