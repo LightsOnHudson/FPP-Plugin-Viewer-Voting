@@ -106,13 +106,14 @@ if($DEBUG) {
 logEntry("VOTE COUNT: ".$VOTE_COUNT);
 logEntry("Last playlist count: ".$PLAYLIST_COUNT);
 
-if($LAST_VOTED_PLAYLIST == $SEQUENCE && $VOTE_COUNT <= $PLAYLIST_COUNT) {
-	logEntry("Sequence: ".$SEQUENCE . " has already played, replacing with operator playlist: ".$PLAYLIST_NAME);
-	$SEQUENCE = $PLAYLIST_NAME;
+if($LAST_VOTED_PLAYLIST == $SEQUENCE &&  $PLAYLIST_COUNT <= $VOTE_COUNT) {
+	
 	$PLAYLIST_COUNT++;
 	WriteSettingToFile("PLAYLIST_COUNT",$PLAYLIST_COUNT,$pluginName);
 	
-} else {
+} elseif($LAST_VOTED_PLAYLIST == $SEQUENCE &&  $PLAYLIST_COUNT > $VOTE_COUNT) {
+	logEntry("Sequence: ".$SEQUENCE . " has reached vote count: ".$VOTE_COUNT.", replacing with operator playlist: ".$PLAYLIST_NAME);
+	$SEQUENCE = $PLAYLIST_NAME;
 	//go ahead and allow this and write it as the last voted
 	//but DO NOT write the playlist they want to use here, because otherwise it would not get there on the next catch
 	//write the last one to the config file
