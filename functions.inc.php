@@ -212,39 +212,6 @@ function tryGetHost($ip)
 
 
 
-function sendTCP($IP, $PORT, $cmd) {
-	
-	
-/* Create a TCP/IP socket. */
-$socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
-if ($socket === false) {
-    logEntry("socket_create() failed: reason: " . socket_strerror(socket_last_error()));
-} else {
-   logEntry("TCPIP Socket Created");
-}
-
-
-$result = socket_connect($socket, $IP, $PORT);
-if ($result === false) {
-    logEntry("socket_connect() failed. Reason: ($result) " . socket_strerror(socket_last_error($socket)));
-} else {
-    logEntry("TCPIP CONNECTED");
-}
-
-
-socket_write($socket, $cmd, strlen($cmd));
-
-
-logEntry("Reading response");
-while ($out = socket_read($socket, 2048)) {
-    logEntry($out);
-}
-
-logEntry("Closing socket...");
-socket_close($socket);
-logEntry("OK");
-
-}
 function hex_dump($data, $newline="\n")
 {
   static $from = '';

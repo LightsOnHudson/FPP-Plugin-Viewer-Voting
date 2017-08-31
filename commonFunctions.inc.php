@@ -97,9 +97,9 @@ function updatePluginFromGitHub($gitURL, $branch="master", $pluginName) {
 function createScriptFile($scriptFilename,$scriptCMD) {
 
 
-	global $scriptDirectory,$pluginName;
+	global $settings,$pluginName;
 
-	$scriptFilename = $scriptDirectory."/".$scriptFilename;
+	$scriptFilename = $settings['scriptDirectory']."/".$scriptFilename;
 
 	logEntry("Creating  script: ".$scriptFilename);
 	
@@ -112,7 +112,7 @@ function createScriptFile($scriptFilename,$scriptCMD) {
 
 	
 	$data .= "\n";
-	$data .= "#Script to run randomizer\n";
+	$data .= "#Script to run $scriptCMD\n";
 	$data .= "#Created by ".$pluginName."\n";
 	$data .= "#\n";
 	$data .= "/usr/bin/php ".$scriptCMD."\n";
@@ -130,9 +130,10 @@ function createScriptFile($scriptFilename,$scriptCMD) {
 //get the next available event filename
 function getNextEventFilename() {
 
+	global $settings;
 	$MAX_MAJOR_DIGITS=2;
 	$MAX_MINOR_DIGITS=2;
-	global $eventDirectory;
+	
 
 	//echo "Event Directory: ".$eventDirectory."<br/> \n";
 
@@ -142,7 +143,7 @@ function getNextEventFilename() {
 	$MAJOR_INDEX=0;
 	$MINOR_INDEX=0;
 
-	$EVENT_FILES = directoryToArray($eventDirectory, false);
+	$EVENT_FILES = directoryToArray($settings['eventDirectory'], false);
 	//print_r($EVENT_FILES);
 
 	foreach ($EVENT_FILES as $eventFile) {
@@ -214,12 +215,13 @@ function directoryToArray($directory, $recursive) {
 
 //check all the event files for a string matching this and return true/false if exist
 function checkEventFilesForKey($keyCheckString) {
-	global $eventDirectory;
+	global $settings;
+	
 
 	$keyExist = false;
 	$eventFiles = array();
 
-	$eventFiles = directoryToArray($eventDirectory, false);
+	$eventFiles = directoryToArray($settings['eventDirectory'], false);
 	foreach ($eventFiles as $eventFile) {
 
 		if( strpos(file_get_contents($eventFile),$keyCheckString) !== false) {
@@ -232,5 +234,51 @@ function checkEventFilesForKey($keyCheckString) {
 
 	return $keyExist;
 
+}
+
+function createViewerVotingEventFiles() {
+	
+	global $settings; //$eventDirectory,$pluginDirectory,$pluginName,$scriptDirectory,$DEVICE_CONNECTION_TYPE,$DEVICE;
+	
+	
+	
+	
+	//echo "next event file name available: ".$nextEventFilename."\n";
+	
+	$EVENT_FILE=false;
+	
+
+					
+					//check to see that the file doesnt already exist - do a grep and return contents
+					$EVENT_CHECK = checkEventFilesForKey("CHECK-VOTES");
+					if(!$EVENT_CHECK)
+					{
+						
+						$nextEventFilename = getNextEventFilename();
+						$MAJOR=substr($nextEventFilename,0,2);
+						$MINOR=substr($nextEventFilename,3,2);
+						$eventData  ="";
+						$eventData  = "majorID=".(int)$MAJOR."\n";
+						$eventData .= "minorID=".(int)$MINOR."\n";
+						$eventData .= "name='CHECK-VOTES'\n";
+						$eventData .= "effect=''\n";
+						$eventData .= "startChannel=\n";
+						$eventData .= "script='checkVotes.sh'\n";
+						
+						//	echo "eventData: ".$eventData."<br/>\n";
+						file_put_contents($eventDirectory."/".$nextEventFilename, $eventData);
+						
+						$scriptCMD = $pluginDirectory."/".$pluginName."/"."checkVOTES.php";
+						createScriptFile("checkVotes.sh",$scriptCMD);
+					}
+				
+				
+				//echo "$key => $val\n";
+			
+		
+	
+	
+	
+	
 }
 ?>

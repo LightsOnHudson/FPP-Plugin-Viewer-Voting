@@ -158,6 +158,9 @@ if(isset($_POST['sync_sequnces'])) {
 		$PLAYED_SEQUENCE_ARRAY = explode(",", $LAST_VOTED_PLAYLISTS);
 	}
 
+	
+	//create the event file if it does not exist!!!
+	createViewerVotingEventFiles();
 ?>
 
 <html>
