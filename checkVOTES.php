@@ -173,12 +173,13 @@ if($PLAY_IN_LAST_COUNT == 0) {
 			logEntry("Played sequence count is > Played in last value: ".$PLAY_IN_LAST_COUNT);
 		}
 		while(count($PLAYED_SEQUENCE_ARRAY) > $PLAY_IN_LAST_COUNT) {
-			array_shift($PLAYED_SEQUENCE_ARRAY);
-			$PLAYED_SEQUENCE_ARRAY = array_values($PLAYED_SEQUENCE_ARRAY);
 			if($DEBUG) {
 				logEntry("Current cound of play sequence array: ".coung($PLAYED_SEQUENCE_ARRAY));
 				logEntry("Removing an entry off the sequence played sequence array to get it below the coung: ".$PLAY_IN_LAST_COUNT);
 			}
+			array_shift($PLAYED_SEQUENCE_ARRAY);
+			$PLAYED_SEQUENCE_ARRAY = array_values($PLAYED_SEQUENCE_ARRAY);
+			
 		
 		} 
 	}
