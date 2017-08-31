@@ -117,7 +117,7 @@ function createScriptFile($scriptFilename,$scriptCMD) {
 	$data .= "#\n";
 	$data .= "/usr/bin/php ".$scriptCMD."\n";
 	
-	logEntry($data);
+	//logEntry($data);
 
 
 	$fs = fopen($scriptFilename,"w");
