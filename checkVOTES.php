@@ -173,7 +173,7 @@ if($PLAY_IN_LAST_COUNT == 0) {
 			logEntry("Played sequence count is > Played in last value: ".$PLAY_IN_LAST_COUNT);
 		}
 		do {
-			array_shift($PLAYED_SEQUENCE_ARRAY);
+			array_splice($PLAYED_SEQUENCE_ARRAY, 0, 1);
 			if($DEBUG) {
 				logEntry("Current cound of play sequence array: ".coung($PLAYED_SEQUENCE_ARRAY));
 				logEntry("Removing an entry off the sequence played sequence array to get it below the coung: ".$PLAY_IN_LAST_COUNT);
