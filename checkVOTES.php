@@ -214,6 +214,8 @@ if($PLAY_IN_LAST_COUNT == 0) {
 		//but DO NOT write the playlist they want to use here, because otherwise it would not get there on the next catch
 		//write the last one to the config file
 		//put it back to a string to save it!
+		//add the playlist to the last played //voted playlists... so it can flish out.
+		array_push($PLAYED_SEQUENCE_ARRAY, $PLAYLIST_NAME);
 		$LAST_VOTED_PLAYLISTS = implode(",", $PLAYED_SEQUENCE_ARRAY);
 		WriteSettingToFile("LAST_VOTED_PLAYLISTS",urlencode($LAST_VOTED_PLAYLISTS),$pluginName);
 		//reset the count to 1
