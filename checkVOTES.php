@@ -124,6 +124,11 @@ if($LAST_VOTED_PLAYLIST == $SEQUENCE &&  $PLAYLIST_COUNT < $VOTE_COUNT) {
 	//reset the count to 1
 	WriteSettingToFile("PLAYLIST_COUNT",0,$pluginName);
 	$SEQUENCE = $PLAYLIST_NAME;
+} else {
+	//reset the playlist count because we got a NEW vote
+	WriteSettingToFile("LAST_VOTED_PLAYLIST",urlencode($SEQUENCE),$pluginName);
+	//reset the count to 1
+	WriteSettingToFile("PLAYLIST_COUNT",0,$pluginName);
 }
 
 logEntry("Loading playlist/sequence: ".$SEQUENCE);
