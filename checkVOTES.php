@@ -254,7 +254,7 @@ if($PLAY_IN_LAST_COUNT == 0) {
 		}
 }
 
-if($DEBUG)
+//if($DEBUG)
 logEntry("Loading playlist/sequence: ".$SEQUENCE);
 
 $PLAY_RESULT = playNewSequence($SEQUENCE);
