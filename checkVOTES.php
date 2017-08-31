@@ -31,20 +31,34 @@ if (file_exists($pluginConfigFile))
 	$DEBUG = $pluginSettings['DEBUG'];
 	$VOTE_COUNT = $pluginSettings['VOTE_COUNT'];
 	$PLAYLIST_COUNT = $pluginSettings['PLAYLIST_COUNT'];
+	$PLAY_IN_LAST_COUNT= $pluginSettings['PLAY_IN_LAST_COUNT'];
+	
+	$PLAYED_SEQUENCE_ARRAY = array();
 	
 	if((int)$PLAYLIST_COUNT <= 0) {
 		$PLAYLIST_COUNT = 0;
 	}
 	//the last playlist that was voted on =
 	$PLAYLIST_NAME = urldecode($pluginSettings['PLAYLIST_NAME']);
-	$LAST_VOTED_PLAYLIST = urldecode($pluginSettings['LAST_VOTED_PLAYLIST']);
+	$LAST_VOTED_PLAYLISTS = urldecode($pluginSettings['LAST_VOTED_PLAYLISTS']);
+	
+	//load it into the array!
+	$PLAYED_SEQUENCE_ARRAY = explode(",", $LAST_VOTED_PLAYLIST);
+	
 	
 	if($DEBUG) {
 		logEntry("API token: ".$API_TOKEN);
 		logEntry("SERVER IP :".$SERVER_IP);
 		logEntry("PLAYLIST IF THRESHOLD HIT: ".$PLAYLIST_NAME);
-		logEntry("LAST VOTED PLAYLIST: ".$LAST_VOTED_PLAYLIST);
+		logEntry("LAST VOTED PLAYLIST: ".$LAST_VOTED_PLAYLISTS);
 		logEntry("LAST VOTED VOTE COUNT: ".$VOTE_COUNT);
+	}
+	
+	if($DEBUG) {
+		//show the array in logentry
+		foreach ($LAST_VOTED_PLAYLISTS as $pl) {
+			logEntry("Playlist in last voted playlists: ".$pl);
+		}
 	}
 
 // = "357FED1F-60C6-C53A-38A4-B5EED9A08B33";
@@ -120,24 +134,24 @@ if($DEBUG) {
 logEntry("VOTE COUNT: ".$VOTE_COUNT);
 logEntry("Last playlist count: ".$PLAYLIST_COUNT);
 
-if($LAST_VOTED_PLAYLIST == $SEQUENCE &&  $PLAYLIST_COUNT < $VOTE_COUNT) {
+if($LAST_VOTED_PLAYLISTS == $SEQUENCE &&  $PLAYLIST_COUNT < $VOTE_COUNT) {
 	
 	$PLAYLIST_COUNT++;
 	WriteSettingToFile("PLAYLIST_COUNT",$PLAYLIST_COUNT,$pluginName);
 	
-} elseif($LAST_VOTED_PLAYLIST == $SEQUENCE &&  $PLAYLIST_COUNT >=  $VOTE_COUNT) {
+} elseif($LAST_VOTED_PLAYLISTS == $SEQUENCE &&  $PLAYLIST_COUNT >=  $VOTE_COUNT) {
 	logEntry("Sequence: ".$SEQUENCE . " has reached vote count: ".$VOTE_COUNT.", replacing with operator playlist: ".$PLAYLIST_NAME);
 	
 	//go ahead and allow this and write it as the last voted
 	//but DO NOT write the playlist they want to use here, because otherwise it would not get there on the next catch
 	//write the last one to the config file
-	WriteSettingToFile("LAST_VOTED_PLAYLIST",urlencode($SEQUENCE),$pluginName);
+	WriteSettingToFile("LAST_VOTED_PLAYLISTS",urlencode($SEQUENCE),$pluginName);
 	//reset the count to 1
 	WriteSettingToFile("PLAYLIST_COUNT",0,$pluginName);
 	$SEQUENCE = $PLAYLIST_NAME;
 } else {
 	//reset the playlist count because we got a NEW vote
-	WriteSettingToFile("LAST_VOTED_PLAYLIST",urlencode($SEQUENCE),$pluginName);
+	WriteSettingToFile("LAST_VOTED_PLAYLISTS",urlencode($SEQUENCE),$pluginName);
 	//reset the count to 1
 	WriteSettingToFile("PLAYLIST_COUNT",0,$pluginName);
 }
