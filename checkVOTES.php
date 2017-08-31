@@ -152,16 +152,16 @@ logEntry("Last playlist count: ".$PLAYLIST_COUNT);
 
 if($PLAY_IN_LAST_COUNT == 0) {
 	if($DEBUG) {
-		logEntry("Play last in count is Zero");
+		logEntry("Play last in count is Zero, allowing repeat, repeat, repeat!");
 	}
 	//it is disabled. just allow this to run!
 	array_push($PLAYED_SEQUENCE_ARRAY, $SEQUENCE);
 	//reset the playlist count because we got a NEW vote
-	$LAST_VOTED_PLAYLISTS = implode(",", $PLAYED_SEQUENCE_ARRAY);
-	WriteSettingToFile("LAST_VOTED_PLAYLISTS",urlencode($LAST_VOTED_PLAYLISTS),$pluginName);
+//	$LAST_VOTED_PLAYLISTS = implode(",", $PLAYED_SEQUENCE_ARRAY);
+//	WriteSettingToFile("LAST_VOTED_PLAYLISTS",urlencode($LAST_VOTED_PLAYLISTS),$pluginName);
 	//reset the count to 1
-	//$PLAYLIST_COUNT++;
-	WriteSettingToFile("PLAYLIST_COUNT",0,$pluginName);
+	$PLAYLIST_COUNT = 0;
+	//WriteSettingToFile("PLAYLIST_COUNT",0,$pluginName);
 	
 } else {
 
