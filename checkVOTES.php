@@ -207,10 +207,10 @@ if($PLAY_IN_LAST_COUNT == 0) {
 			
 			//it is in the array however it has not allowed to play the number of times.
 			if($DEBUG) {
-				logEntry("Sequence: ".$SEQUENCE." is in the last played, however it has not played enough repeat times");
+				logEntry("Sequence: ".$SEQUENCE." is in the last played, however it has not played enough allowed voted count: ".$VOTE_COUNT." repeat times");
 			}
 			$PLAYLIST_COUNT++;
-			WriteSettingToFile("PLAYLIST_COUNT",$PLAYLIST_COUNT,$pluginName);
+			//WriteSettingToFile("PLAYLIST_COUNT",$PLAYLIST_COUNT,$pluginName);
 			
 			
 				
@@ -222,7 +222,7 @@ if($PLAY_IN_LAST_COUNT == 0) {
 		
 			$SEQUENCE = $PLAYLIST_NAME;
 			
-			
+			$PLAYLIST_COUNT = 0;
 				
 		} elseif(!in_array($SEQUENCE, $PLAYED_SEQUENCE_ARRAY) &&  $PLAYLIST_COUNT < $VOTE_COUNT) {
 			
@@ -231,7 +231,7 @@ if($PLAY_IN_LAST_COUNT == 0) {
 				logEntry("Sequence: ".$SEQUENCE." is NOT the last played");
 			}
 			$PLAYLIST_COUNT++;
-			WriteSettingToFile("PLAYLIST_COUNT",$PLAYLIST_COUNT,$pluginName);
+			//WriteSettingToFile("PLAYLIST_COUNT",$PLAYLIST_COUNT,$pluginName);
 			
 				
 		}
@@ -243,7 +243,7 @@ $PLAY_RESULT = playNewSequence($SEQUENCE);
 array_push($PLAYED_SEQUENCE_ARRAY, $SEQUENCE);
 $LAST_VOTED_PLAYLISTS = implode(",", $PLAYED_SEQUENCE_ARRAY);
 WriteSettingToFile("LAST_VOTED_PLAYLISTS",urlencode($LAST_VOTED_PLAYLISTS),$pluginName);
-
+WriteSettingToFile("PLAYLIST_COUNT",$PLAYLIST_COUNT,$pluginName);
 
 
 
