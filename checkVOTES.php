@@ -32,6 +32,9 @@ if (file_exists($pluginConfigFile))
 	$VOTE_COUNT = $pluginSettings['VOTE_COUNT'];
 	$PLAYLIST_COUNT = $pluginSettings['PLAYLIST_COUNT'];
 	
+	if((int)$PLAYLIST_COUNT <= 0) {
+		$PLAYLIST_COUNT = 0;
+	}
 	//the last playlist that was voted on =
 	$PLAYLIST_NAME = urldecode($pluginSettings['PLAYLIST_NAME']);
 	$LAST_VOTED_PLAYLIST = urldecode($pluginSettings['LAST_VOTED_PLAYLIST']);
@@ -106,12 +109,12 @@ if($DEBUG) {
 logEntry("VOTE COUNT: ".$VOTE_COUNT);
 logEntry("Last playlist count: ".$PLAYLIST_COUNT);
 
-if($LAST_VOTED_PLAYLIST == $SEQUENCE &&  $PLAYLIST_COUNT <= $VOTE_COUNT) {
+if($LAST_VOTED_PLAYLIST == $SEQUENCE &&  $PLAYLIST_COUNT < $VOTE_COUNT) {
 	
 	$PLAYLIST_COUNT++;
 	WriteSettingToFile("PLAYLIST_COUNT",$PLAYLIST_COUNT,$pluginName);
 	
-} elseif($LAST_VOTED_PLAYLIST == $SEQUENCE &&  $PLAYLIST_COUNT > $VOTE_COUNT) {
+} elseif($LAST_VOTED_PLAYLIST == $SEQUENCE &&  $PLAYLIST_COUNT >=  $VOTE_COUNT) {
 	logEntry("Sequence: ".$SEQUENCE . " has reached vote count: ".$VOTE_COUNT.", replacing with operator playlist: ".$PLAYLIST_NAME);
 	$SEQUENCE = $PLAYLIST_NAME;
 	//go ahead and allow this and write it as the last voted
@@ -119,7 +122,7 @@ if($LAST_VOTED_PLAYLIST == $SEQUENCE &&  $PLAYLIST_COUNT <= $VOTE_COUNT) {
 	//write the last one to the config file
 	WriteSettingToFile("LAST_VOTED_PLAYLIST",urlencode($SEQUENCE),$pluginName);
 	//reset the count to 1
-	WriteSettingToFile("PLAYLIST_COUNT",1,$pluginName);
+	WriteSettingToFile("PLAYLIST_COUNT",0,$pluginName);
 }
 
 logEntry("Loading playlist/sequence: ".$SEQUENCE);
