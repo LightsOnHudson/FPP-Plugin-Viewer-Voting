@@ -58,7 +58,7 @@ if($DEBUG) {
 
 //replace the playlist in the schedule
 
-$UPDATE_PLAYLIST_IN_SCHEDULE = updatePlaylistInSchedule($SEQUENCE);
+//$UPDATE_PLAYLIST_IN_SCHEDULE = updatePlaylistInSchedule($SEQUENCE);
 
 
 //the new playlist has been loaded into the schedule!!!
@@ -68,7 +68,7 @@ if($DEBUG) {
 	logEntry("Reloading schedule cmd: ".$CMD_RELOAD_SCHEDULE);
 	
 }
-shell_exec($CMD_RELOAD_SCHEDULE);
+//shell_exec($CMD_RELOAD_SCHEDULE);
 
 //STOP the fppd daemon
 //then restart it
@@ -76,7 +76,7 @@ $CMD_FPPD_STOP = "/usr/bin/sudo /opt/fpp/scripts/fppd_stop";
 if($DEBUG) {
 	logEntry("Stopping fppd to have the schedule take effect!!!");
 }
-shell_exec($CMD_FPPD_STOP);
+//shell_exec($CMD_FPPD_STOP);
 
 //start the ffpd
 $CMD_FPPD_START = "/usr/bin/sudo /opt/fpp/scripts/fppd_start";
@@ -84,7 +84,7 @@ if($DEBUG) {
 	logEntry("Starting the fppd to have the schedule take effect!!!");
 	
 }
-shell_exec($CMD_FPPD_START);
+//shell_exec($CMD_FPPD_START);
 
 //now that the fppd daemon is restart, start the new playlist! running. maybe we do not have to kill the daemon??..
 
