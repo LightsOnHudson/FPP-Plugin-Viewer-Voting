@@ -222,7 +222,11 @@ if($PLAY_IN_LAST_COUNT == 0) {
 		
 			$SEQUENCE = $PLAYLIST_NAME;
 			
-			$PLAYLIST_COUNT = 0;
+			//do not reset the playlist count here
+			//it checks this value when a new voted playlist comes in and if it IS in the last AND the playlist is equal or grater
+			//it will not allow it to go through
+			//so do not reset it!
+			//$PLAYLIST_COUNT = 0;
 				
 		//} elseif(!in_array($SEQUENCE, $PLAYED_SEQUENCE_ARRAY) &&  $PLAYLIST_COUNT < $VOTE_COUNT) {
 		} elseif($PLAYLIST_COUNT < $VOTE_COUNT) {
