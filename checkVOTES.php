@@ -86,10 +86,13 @@ if($DEBUG) {
 }
 shell_exec($CMD_FPPD_START);
 
-$playlist= "VOTE_TEST";
+//now that the fppd daemon is restart, start the new playlist! running. maybe we do not have to kill the daemon??..
 
-$LOAD_RESULT = loadNewPlaylist($playlist);
 
-logEntry("Load playlist result: ".$LOAD_RESULT);
+//$playlist= "VOTE_TEST";
+
+$PLAY_RESULT = playNewSequence($SEQUENCE);
+
+//logEntry("Load playlist result: ".$LOAD_RESULT);
 
 ?>

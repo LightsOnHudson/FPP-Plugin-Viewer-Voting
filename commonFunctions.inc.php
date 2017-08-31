@@ -21,9 +21,47 @@ function loadNewPlaylist($playlist) {
 	$FPPD_LOCATION = $settings['fppDir']."/fppd";
 	
 	
+	if(file_exists($FPPD_LOCATION)) {
+		
+	}else {
+	
+		//it is in the SRC location
+		$FPPD_LOCATION = $settings['fppDir']."/src/fppd";
+	}
+	
 	
 	return $LOAD_RESULT;
 	
+}
+
+function playNewSequence($sequence) {
+	
+	global $DEBUG,  $settings;
+	
+	$PLAY_RESULT = false;
+	
+	logEntry("Loading a new Sequence: ".$sequence);
+	
+	logEntry("FPP Bin dir: ".$settings['fppDir']);
+	
+	//FPP FPPD location need to fix based on the platform!
+	$FPP_LOCATION = $settings['fppDir']."/fppd";
+	
+	
+	if(file_exists($FPP_LOCATION)) {
+		
+	}else {
+		
+		//it is in the SRC location
+		$FPP_LOCATION = $settings['fppDir']."/src/fpp";
+	}
+	
+	//set the sequence to play!
+	$PLAY_CMD = $FPP_LOCATION ." -P ".$sequence;
+	shell_exec($PLAY_CMD);
+	
+	//return $PLAY_RESULT;
+	return;
 }
 
 
