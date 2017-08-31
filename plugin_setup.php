@@ -122,6 +122,7 @@ if(isset($_POST['sync_sequnces'])) {
 	
 	$API_TOKEN= $pluginSettings['API_TOKEN'];
 	$SERVER_IP= $pluginSettings['SERVER_IP'];
+	$PLAYLIST_NAME= $pluginSettings['PLAYLIST_NAME'];
 	
 	
 	//$ENABLED = ReadSettingFromFile("ENABLED",$pluginName);
@@ -177,9 +178,9 @@ echo "Client Token: \n";
 echo "<input size=\"64\" type=\"text\" name=\"API_TOKEN\" value=\"".$API_TOKEN."\"> \n";
 echo "<p/>\n";
 echo "Playlist Name (Playlist to play when no votes, or max repeats reached for a given playlist): ";
-PrintMediaOptions();
+PrintMediaOptions($PLAYLIST_NAME);
 
-function PrintMediaOptions()
+function PrintMediaOptions($PLAYLIST_NAME)
 {
 	global $playlistDirectory;
 	
@@ -192,7 +193,11 @@ function PrintMediaOptions()
 	{
 		if($playlist != '.' && $playlist != '..')
 		{
-			echo "<option value=\"" . $playlist . "\">" . $playlist . "</option>";
+			if($playlist == $PLAYLIST_NAME) {
+				echo "<option selected value=\"" . $playlist . "\">" . $playlist . "</option>";
+			} else {
+				echo "<option value=\"" . $playlist . "\">" . $playlist . "</option>";
+			}
 		}
 	}
 	echo "</select>";
