@@ -38,6 +38,11 @@ if (file_exists($pluginConfigFile))
 	if((int)$PLAYLIST_COUNT <= 0) {
 		$PLAYLIST_COUNT = 0;
 	}
+	//initize to 3
+	if((int)$PLAY_IN_LAST_COUNT <= 0) {
+		//disabled!!!
+		$PLAY_IN_LAST_COUNT = 0;
+	}
 	//the last playlist that was voted on =
 	$PLAYLIST_NAME = urldecode($pluginSettings['PLAYLIST_NAME']);
 	$LAST_VOTED_PLAYLISTS = urldecode($pluginSettings['LAST_VOTED_PLAYLISTS']);
@@ -145,33 +150,49 @@ if($DEBUG) {
 
 array_push($PLAYED_SEQUENCE_ARRAY, $SEQUENCE);
 
-
-
-if($LAST_VOTED_PLAYLISTS == $SEQUENCE &&  $PLAYLIST_COUNT < $VOTE_COUNT) {
-	
-	$PLAYLIST_COUNT++;
-	WriteSettingToFile("PLAYLIST_COUNT",$PLAYLIST_COUNT,$pluginName);
-	
-} elseif($LAST_VOTED_PLAYLISTS == $SEQUENCE &&  $PLAYLIST_COUNT >=  $VOTE_COUNT) {
-	logEntry("Sequence: ".$SEQUENCE . " has reached vote count: ".$VOTE_COUNT.", replacing with operator playlist: ".$PLAYLIST_NAME);
-	
-	//go ahead and allow this and write it as the last voted
-	//but DO NOT write the playlist they want to use here, because otherwise it would not get there on the next catch
-	//write the last one to the config file
-	//put it back to a string to save it!
-	$LAST_VOTED_PLAYLISTS = implode(",", $PLAYED_SEQUENCE_ARRAY);
-	WriteSettingToFile("LAST_VOTED_PLAYLISTS",urlencode($LAST_VOTED_PLAYLISTS),$pluginName);
-	//reset the count to 1
-	WriteSettingToFile("PLAYLIST_COUNT",0,$pluginName);
-	$SEQUENCE = $PLAYLIST_NAME;
-} else {
+if($PLAY_IN_LAST_COUNT = 0) {
+	//it is disabled. just allow this to run!
 	//reset the playlist count because we got a NEW vote
 	$LAST_VOTED_PLAYLISTS = implode(",", $PLAYED_SEQUENCE_ARRAY);
 	WriteSettingToFile("LAST_VOTED_PLAYLISTS",urlencode($LAST_VOTED_PLAYLISTS),$pluginName);
 	//reset the count to 1
+	//$PLAYLIST_COUNT++;
 	WriteSettingToFile("PLAYLIST_COUNT",0,$pluginName);
-}
+	
+} else {
 
+	//reset the array to the highest $PLAY_IN_LAST_COUNT
+	if(count($PLAYED_SEQUENCE_ARRAY) > $PLAY_IN_LAST_COUNT) {
+		//take the TOP one off
+		array_shift($PLAYED_SEQUENCE_ARRAY);
+	}
+	
+	if(in_array($SEQUENCE, $PLAYED_SEQUENCE_ARRAY) &&  $PLAYLIST_COUNT < $VOTE_COUNT) {
+		
+		$PLAYLIST_COUNT++;
+		WriteSettingToFile("PLAYLIST_COUNT",$PLAYLIST_COUNT,$pluginName);
+		
+	} elseif(in_array($SEQUENCE, $PLAYED_SEQUENCE_ARRAY) &&  $PLAYLIST_COUNT >=  $VOTE_COUNT) {
+		logEntry("Sequence: ".$SEQUENCE . " has reached vote count: ".$VOTE_COUNT.", replacing with operator playlist: ".$PLAYLIST_NAME);
+		
+		//go ahead and allow this and write it as the last voted
+		//but DO NOT write the playlist they want to use here, because otherwise it would not get there on the next catch
+		//write the last one to the config file
+		//put it back to a string to save it!
+		$LAST_VOTED_PLAYLISTS = implode(",", $PLAYED_SEQUENCE_ARRAY);
+		WriteSettingToFile("LAST_VOTED_PLAYLISTS",urlencode($LAST_VOTED_PLAYLISTS),$pluginName);
+		//reset the count to 1
+		WriteSettingToFile("PLAYLIST_COUNT",0,$pluginName);
+		$SEQUENCE = $PLAYLIST_NAME;
+	} else {
+		//reset the playlist count because we got a NEW vote
+		$LAST_VOTED_PLAYLISTS = implode(",", $PLAYED_SEQUENCE_ARRAY);
+		WriteSettingToFile("LAST_VOTED_PLAYLISTS",urlencode($LAST_VOTED_PLAYLISTS),$pluginName);
+		//reset the count to 1
+		WriteSettingToFile("PLAYLIST_COUNT",0,$pluginName);
+	}
+
+}
 logEntry("Loading playlist/sequence: ".$SEQUENCE);
 
 $PLAY_RESULT = playNewSequence($SEQUENCE);
