@@ -43,7 +43,7 @@ if (file_exists($pluginConfigFile))
 	$LAST_VOTED_PLAYLISTS = urldecode($pluginSettings['LAST_VOTED_PLAYLISTS']);
 	
 	//load it into the array!
-	$PLAYED_SEQUENCE_ARRAY = explode(",", $LAST_VOTED_PLAYLIST);
+	$PLAYED_SEQUENCE_ARRAY = explode(",", $LAST_VOTED_PLAYLISTS);
 	
 	
 	if($DEBUG) {
