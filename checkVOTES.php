@@ -112,7 +112,7 @@ if($DEBUG) {
 //now tell the FPP binary to reload the schedule
 $CMD_RELOAD_SCHEDULE = $FPP_BIN." -R";
 if($DEBUG) {
-	logEntry("Reloading schedule cmd: ".$CMD_RELOAD_SCHEDULE);
+	//logEntry("Reloading schedule cmd: ".$CMD_RELOAD_SCHEDULE);
 	
 }
 //shell_exec($CMD_RELOAD_SCHEDULE);

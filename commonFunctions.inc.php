@@ -39,11 +39,11 @@ function playNewSequence($sequence) {
 	global $DEBUG,  $settings;
 	
 	$PLAY_RESULT = false;
-	
-	logEntry("Loading a new Sequence: ".$sequence);
-	
-	logEntry("FPP Bin dir: ".$settings['fppDir']);
-	
+	if($DEBUG) {
+		logEntry("Loading a new Sequence: ".$sequence);
+		
+		logEntry("FPP Bin dir: ".$settings['fppDir']);
+	}
 	//FPP FPPD location need to fix based on the platform!
 	$FPP_LOCATION = $settings['fppDir']."/fppd";
 	
