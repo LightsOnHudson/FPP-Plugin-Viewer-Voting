@@ -43,8 +43,13 @@ if (file_exists($pluginConfigFile))
 	$LAST_VOTED_PLAYLISTS = urldecode($pluginSettings['LAST_VOTED_PLAYLISTS']);
 	
 	//load it into the array!
-	$PLAYED_SEQUENCE_ARRAY = explode(",", $LAST_VOTED_PLAYLISTS);
-	
+	//if there is no comma just push the value into the array!
+	$pos = strpos($LAST_VOTED_PLAYLISTS, ",");
+	if ($pos === false) {
+		array_push($PLAYED_SEQUENCE_ARRAY, $LAST_VOTED_PLAYLISTS);
+	} else {
+		$PLAYED_SEQUENCE_ARRAY = explode(",", $LAST_VOTED_PLAYLISTS);
+	}
 	
 	if($DEBUG) {
 		logEntry("API token: ".$API_TOKEN);
