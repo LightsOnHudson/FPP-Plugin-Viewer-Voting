@@ -29,6 +29,8 @@ if (file_exists($pluginConfigFile))
 	$API_TOKEN= $pluginSettings['API_TOKEN'];
 	$SERVER_IP= $pluginSettings['SERVER_IP'];
 	$DEBUG = $pluginSettings['DEBUG'];
+	$VOTE_COUNT = $pluginSettings['VOTE_COUNT'];
+	$PLAYLIST_COUNT = $pluginSettings['PLAYLIST_COUNT'];
 	
 	//the last playlist that was voted on =
 	$PLAYLIST_NAME = urldecode($pluginSettings['PLAYLIST_NAME']);
@@ -39,6 +41,7 @@ if (file_exists($pluginConfigFile))
 		logEntry("SERVER IP :".$SERVER_IP);
 		logEntry("PLAYLIST IF THRESHOLD HIT: ".$PLAYLIST_NAME);
 		logEntry("LAST VOTED PLAYLIST: ".$LAST_VOTED_PLAYLIST);
+		logEntry("LAST VOTED VOTE COUNT: ".$VOTE_COUNT);
 	}
 
 // = "357FED1F-60C6-C53A-38A4-B5EED9A08B33";
@@ -100,14 +103,22 @@ if($DEBUG) {
 //check to see if the last playlist name is the current one 
 //if so, then use the PLAYLIST 
 
-if($LAST_VOTED_PLAYLIST == $SEQUENCE) {
+logEntry("VOTE COUNT: ".$VOTE_COUNT);
+logEntry("Last playlist count: ".$PLAYLIST_COUNT);
+
+if($LAST_VOTED_PLAYLIST == $SEQUENCE && $VOTE_COUNT <= $PLAYLIST_COUNT) {
+	logEntry("Sequence: ".$SEQUENCE . " has already played, replacing with operator playlist: ".$PLAYLIST_NAME);
 	$SEQUENCE = $PLAYLIST_NAME;
+	$PLAYLIST_COUNT++;
+	WriteSettingToFile("PLAYLIST_COUNT",$PLAYLIST_COUNT,$pluginName);
 	
 } else {
 	//go ahead and allow this and write it as the last voted
 	//but DO NOT write the playlist they want to use here, because otherwise it would not get there on the next catch
 	//write the last one to the config file
 	WriteSettingToFile("LAST_VOTED_PLAYLIST",urlencode($SEQUENCE),$pluginName);
+	//reset the count to 1
+	WriteSettingToFile("PLAYLIST_COUNT",1,$pluginName);
 }
 
 logEntry("Loading playlist/sequence: ".$SEQUENCE);

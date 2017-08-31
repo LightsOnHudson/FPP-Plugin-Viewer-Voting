@@ -106,7 +106,7 @@ if(isset($_POST['sync_sequnces'])) {
 	//$ENABLED=$_POST["ENABLED"];
 
 	//	echo "Writring config fie <br/> \n";
-
+	WriteSettingToFile("VOTE_COUNT",urlencode($_POST["VOTE_COUNT"]),$pluginName);
 	WriteSettingToFile("PLAYLIST_NAME",urlencode($_POST["PLAYLIST_NAME"]),$pluginName);
 	WriteSettingToFile("API_TOKEN",urlencode($_POST["API_TOKEN"]),$pluginName);
 
@@ -123,7 +123,12 @@ if(isset($_POST['sync_sequnces'])) {
 	$API_TOKEN= $pluginSettings['API_TOKEN'];
 	$SERVER_IP= $pluginSettings['SERVER_IP'];
 	$PLAYLIST_NAME= $pluginSettings['PLAYLIST_NAME'];
+	$VOTE_COUNT= $pluginSettings['VOTE_COUNT'];
 	
+	//set default!
+	if(int($VOTE_COUNT) <=0) {
+		$VOTE_COUNT = 1;
+	}
 	
 	//$ENABLED = ReadSettingFromFile("ENABLED",$pluginName);
 	//$ENABLED = ReadSettingFromFile("ENABLED",$pluginName);
@@ -202,17 +207,22 @@ function PrintMediaOptions($PLAYLIST_NAME)
 	}
 	echo "</select>";
 }
+echo "<p/>\n";
 
+echo "Vote Count (How many times a voted sequence can play in a row before playing the ABOVE playlist will replace it: \n";
+echo "<input size=\"3\" type=\"text\" name=\"VOTE_COUNT\" value=\"".$VOTE_COUNT."\"> \n";
+echo "<p/>\n";
 echo "<p/> \n";
 
 ?>
 <p/>
 <input id="submit_button" name="save_config" type="submit" class="buttons" value="Save Config">
 
-<input id="sync_sequences" name="sync_sequnces" type="submit" class="buttons" value="Sync Sequnences">
+<input id="sync_sequences" name="sync_sequnces" type="submit" class="buttons" value="Sync Sequnences to Server">
 
+<!-- 
 <input id="sync_playlists" name="sync_playlists" type="submit" class="buttons" value="Sync Playlists">
-
+-->
 </form>
 
 
