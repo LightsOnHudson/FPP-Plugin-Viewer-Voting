@@ -204,10 +204,23 @@ if($PLAY_IN_LAST_COUNT == 0) {
 		//since we reset the array, we should be able to tell if it has played just by doing if in array
 		if(in_array($SEQUENCE, $PLAYED_SEQUENCE_ARRAY)) {
 			if($DEBUG) {
-				logEntry("Sequence: ".$SEQUENCE." has played in the last: ".$PLAY_IN_LAST_COUNT. " Substituting in Playlist name");
+				logEntry("Sequence: ".$SEQUENCE." has played in the last: ".$PLAY_IN_LAST_COUNT. " Substituting in Playlist name: ".$PLAYLIST_NAME);
 			}
 				$SEQUENCE = $PLAYLIST_NAME;
 				
+				//trim the array, and then reset it!
+				$PLAYED_SEQUENCE_ARRAY_COUNT = count($PLAYED_SEQUENCE_ARRAY);
+				
+				while($PLAYED_SEQUENCE_ARRAY_COUNT > $PLAY_IN_LAST_COUNT) {
+					if($DEBUG) {
+						logEntry("Current cound of play sequence array: ".count($PLAYED_SEQUENCE_ARRAY));
+						logEntry("Removing an entry off the sequence played sequence array to get it below the coung: ".$PLAY_IN_LAST_COUNT);
+					}
+					array_shift($PLAYED_SEQUENCE_ARRAY);
+					$PLAYED_SEQUENCE_ARRAY = array_values($PLAYED_SEQUENCE_ARRAY);
+					$PLAYED_SEQUENCE_ARRAY_COUNT = count($PLAYED_SEQUENCE_ARRAY);
+					
+				} 
 				//push it to the end of the array
 				array_push($PLAYED_SEQUENCE_ARRAY, $SEQUENCE);
 				//write it out
