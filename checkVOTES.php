@@ -116,13 +116,14 @@ if($LAST_VOTED_PLAYLIST == $SEQUENCE &&  $PLAYLIST_COUNT < $VOTE_COUNT) {
 	
 } elseif($LAST_VOTED_PLAYLIST == $SEQUENCE &&  $PLAYLIST_COUNT >=  $VOTE_COUNT) {
 	logEntry("Sequence: ".$SEQUENCE . " has reached vote count: ".$VOTE_COUNT.", replacing with operator playlist: ".$PLAYLIST_NAME);
-	$SEQUENCE = $PLAYLIST_NAME;
+	
 	//go ahead and allow this and write it as the last voted
 	//but DO NOT write the playlist they want to use here, because otherwise it would not get there on the next catch
 	//write the last one to the config file
 	WriteSettingToFile("LAST_VOTED_PLAYLIST",urlencode($SEQUENCE),$pluginName);
 	//reset the count to 1
 	WriteSettingToFile("PLAYLIST_COUNT",0,$pluginName);
+	$SEQUENCE = $PLAYLIST_NAME;
 }
 
 logEntry("Loading playlist/sequence: ".$SEQUENCE);
