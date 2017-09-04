@@ -4,7 +4,31 @@
 function sendSequencesToServer($SERVER_IP, $API_TOKEN, $SEQUENCE_ARRAY) {
 	
 	global $DEBUG;
+	
+	$JSON_ARRAY = array();
+	$JSON_ARRAY = array("SYNC_CMD" => "SEQUENCES", "API_TOKEN" => $API_TOKEN, "SEQUENCES" => $SEQUENCE_ARRAY);
+	
+	
+	$data_string = json_encode($JSON_ARRAY);
+	
+	$ch = curl_init('http://api.local/rest/users');
+	curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+	curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+			'Content-Type: application/json',
+			'Content-Length: ' . strlen($data_string))
+			);
+	
+	$result = curl_exec($ch);
+	$response = json_decode($result, true);
+	logEntry("JSON response from sync: ".$response);
+	
+	return;
+	
 	$CHECK_VOTES_CMD = "http://". $SERVER_IP . "/FPPViewerVotingServer/sync.php?SYNC_CMD=SEQUENCES&API_TOKEN=".$API_TOKEN;
+	
+	
 	
 	$SEQUENCES = implode(",", $SEQUENCE_ARRAY);
 	
