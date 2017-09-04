@@ -20,8 +20,11 @@ function sendSequencesToServer($SERVER_IP, $API_TOKEN, $SEQUENCE_ARRAY) {
 		foreach($TEST_DATA as $key => $value) {
 			logEntry(" TEST DATA KEY: ".$key. " = ".$value);
 		}
-		
+		foreach($TEST_DATA['SEQUENCES'] as $seq) {
+			logEntry(" TEST DATA Sequence : ".$seq);
+		}
 	}
+	
 	
 	$ch = curl_init("http://". $SERVER_IP . "/FPPViewerVotingServer/sync.php");
 	curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
