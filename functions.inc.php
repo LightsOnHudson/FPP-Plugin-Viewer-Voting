@@ -6,7 +6,7 @@ function sendSequencesToServer($SERVER_IP, $API_TOKEN, $SEQUENCE_ARRAY) {
 	global $DEBUG;
 	
 	$JSON_ARRAY = array();
-	$JSON_ARRAY = array("SYNC_CMD" => "SEQUENCES", "API_TOKEN" => "$API_TOKEN", "SEQUENCES" => "$SEQUENCE_ARRAY");
+	$JSON_ARRAY = array("SYNC_CMD" => "SEQUENCES", "API_TOKEN" => "$API_TOKEN", "SEQUENCES" => "implode(",",$SEQUENCE_ARRAY)");
 	
 	
 	$data_string = json_encode($JSON_ARRAY);
