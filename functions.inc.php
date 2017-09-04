@@ -17,7 +17,7 @@ function sendSequencesToServer($SERVER_IP, $API_TOKEN, $SEQUENCE_ARRAY) {
 	if($DEBUG) {
 		logEntry("JSON data being sent to server: ".$SERVER_IP);
 		
-		foreach($TEST_DATA[0] as $key => $value) {
+		foreach($TEST_DATA as $key => $value) {
 			logEntry(" TEST DATA KEY: ".$key. " = ".$value);
 		}
 		
