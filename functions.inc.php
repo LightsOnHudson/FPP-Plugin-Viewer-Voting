@@ -11,6 +11,18 @@ function sendSequencesToServer($SERVER_IP, $API_TOKEN, $SEQUENCE_ARRAY) {
 	
 	$data_string = json_encode($JSON_ARRAY);
 	
+	$TEST_DATA = json_decode($data_string, TRUE);
+	
+	//print_r($data);
+	if($DEBUG) {
+		logEntry("JSON data being sent to server: ".$SERVER_IP);
+		
+		foreach($TEST_DATA[0] as $key => $value) {
+			logEntry(" TEST DATA KEY: ".$key. " = ".$value);
+		}
+		
+	}
+	
 	$ch = curl_init("http://". $SERVER_IP . "/FPPViewerVotingServer/sync.php");
 	curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
 	curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
