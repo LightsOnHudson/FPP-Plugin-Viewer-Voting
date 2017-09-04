@@ -249,9 +249,9 @@ function createViewerVotingEventFiles() {
 	if($DEBUG)
 		logEntry("Inside: ".__FUNCTION__,1,__FILE__,__LINE__);
 		
-	foreach ($settings as $key => $value) {
-		logEntry("Settings: ".$key. " has value: ".$value);
-	}
+	//foreach ($settings as $key => $value) {
+	//	logEntry("Settings: ".$key. " has value: ".$value);
+	//}
 	
 	//echo "next event file name available: ".$nextEventFilename."\n";
 	

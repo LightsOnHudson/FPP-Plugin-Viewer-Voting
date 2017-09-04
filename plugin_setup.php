@@ -78,7 +78,7 @@ if(isset($_POST['sync_sequnces'])) {
 	}
 	
 	
-	print_r($SEQUENCE_ARRAY);
+	//print_r($SEQUENCE_ARRAY);
 	sendSequencesToServer($SERVER_IP, $API_TOKEN, $SEQUENCE_ARRAY);
 	//continue;
 	//break;
